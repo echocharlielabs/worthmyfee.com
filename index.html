@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Worth My Fee — Is your card worth its annual fee?</title>
+<link rel="canonical" href="https://worthmyfee.com/">
 <meta name="description" content="Connect your cards, and Worth My Fee audits every advertised credit: which ones you can actually reach, which are traps, and whether each card earns its fee.">
 <link rel="icon" type="image/png" href="/logo-512.png">
 <link rel="apple-touch-icon" href="/logo-512.png">
@@ -11,12 +12,17 @@
 <meta property="og:site_name" content="Worth My Fee">
 <meta property="og:title" content="Worth My Fee — is your card worth its annual fee?">
 <meta property="og:description" content="Your card advertises $2,000 in credits. How much can you actually reach? We do the subtraction.">
-<meta property="og:image" content="https://worthmyfee.com/logo-1024.png">
+<meta property="og:image" content="https://worthmyfee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Worth My Fee: a sample audit showing $6,062 in advertised credits, $762 reachable.">
 <meta property="og:url" content="https://worthmyfee.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Worth My Fee — is your card worth its annual fee?">
 <meta name="twitter:description" content="Your card advertises $2,000 in credits. How much can you actually reach?">
-<meta name="twitter:image" content="https://worthmyfee.com/logo-1024.png">
+<meta name="twitter:image" content="https://worthmyfee.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..600&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root {
@@ -334,6 +340,58 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
     "@type": "Answer",
     "text": "In the app, Settings → Support opens a ticket that a person reads. Otherwise email hello@worthmyfee.com (privacy questions: privacy@worthmyfee.com). Anything the audit is known not to handle yet is on the known limitations page."
    }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Organization",
+   "@id": "https://worthmyfee.com/#organization",
+   "name": "Worth My Fee",
+   "legalName": "Echo Charlie Labs, Inc.",
+   "url": "https://worthmyfee.com/",
+   "logo": "https://worthmyfee.com/logo-1024.png",
+   "email": "hello@worthmyfee.com"
+  },
+  {
+   "@type": "WebSite",
+   "@id": "https://worthmyfee.com/#website",
+   "url": "https://worthmyfee.com/",
+   "name": "Worth My Fee",
+   "publisher": { "@id": "https://worthmyfee.com/#organization" }
+  },
+  {
+   "@type": "SoftwareApplication",
+   "@id": "https://worthmyfee.com/#app",
+   "name": "Worth My Fee",
+   "url": "https://app.worthmyfee.com/",
+   "applicationCategory": "FinanceApplication",
+   "operatingSystem": "Web",
+   "description": "Connect your credit cards and Worth My Fee audits every advertised credit against 12 months of real spending: which credits you can actually reach, which are traps, and whether each card earns its annual fee.",
+   "featureList": "Keep, downgrade or cancel verdict per card; every credit scored against your own charges; trap detection with issuer citations; downgrade targets scored on your year; fee-date reminders",
+   "screenshot": "https://worthmyfee.com/og-image.png",
+   "publisher": { "@id": "https://worthmyfee.com/#organization" },
+   "offers": [
+    {
+     "@type": "Offer",
+     "name": "The topline",
+     "price": "0",
+     "priceCurrency": "USD",
+     "description": "Your whole portfolio's fees, advertised and reachable totals, plus your lowest-scoring card in full."
+    },
+    {
+     "@type": "Offer",
+     "name": "Every card, every credit",
+     "price": "49",
+     "priceCurrency": "USD",
+     "description": "The full report for every card and credit. Renews yearly; cancel any time. 3× value-found-or-refund guarantee.",
+     "url": "https://worthmyfee.com/#pricing"
+    }
+   ]
   }
  ]
 }
