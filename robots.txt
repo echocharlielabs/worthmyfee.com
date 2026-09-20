@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /logo-generator.html
+
+Sitemap: https://worthmyfee.com/sitemap.xml
