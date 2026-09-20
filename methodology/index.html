@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How Worth My Fee scores a card — methodology</title>
+<meta name="description" content="How Worth My Fee scores a premium card: evidence from 12 months of real transactions, conservative point values, elite-status conflicts, and the guarantee arithmetic, with the constants the code uses.">
+<link rel="canonical" href="https://worthmyfee.com/methodology/">
+<link rel="icon" type="image/png" href="/logo-512.png">
+<link rel="apple-touch-icon" href="/logo-512.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Worth My Fee">
+<meta property="og:title" content="How Worth My Fee scores a card — methodology">
+<meta property="og:description" content="How Worth My Fee scores a premium card: evidence from 12 months of real transactions, conservative point values, elite-status conflicts, and the guarantee arithmetic, with the constants the code uses.">
+<meta property="og:image" content="https://worthmyfee.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://worthmyfee.com/methodology/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How Worth My Fee scores a card — methodology">
+<meta name="twitter:description" content="How Worth My Fee scores a premium card: evidence from 12 months of real transactions, conservative point values, elite-status conflicts, and the guarantee arithmetic, with the constants the code uses.">
+<meta name="twitter:image" content="https://worthmyfee.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..800;1,6..72,400..600&family=Libre+Franklin:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{--paper:#F7F5F0;--paper-raised:#FFFFFF;--ink:#20231F;--ink-soft:#4A4D45;--muted:#75786F;--rule:#D9D5CA;--rule-strong:#B9B5A8;--green:#25604A;--green-deep:#1B4A38;--green-soft:#E3EBE5;--rust:#A63D2A;--rust-soft:#F2E4DF;--amber:#8A5A12;--amber-soft:#F3E9D2}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Libre Franklin","Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.65}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
+a{color:var(--green)}
+nav{border-bottom:1px solid var(--rule);background:var(--paper)}
+.nav-inner{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 0;gap:1rem}
+.wordmark{font-family:"Newsreader",Georgia,serif;font-weight:700;font-size:1.25rem;color:var(--ink);text-decoration:none;letter-spacing:-0.01em;white-space:nowrap}
+.wordmark .q{color:var(--green)}
+.nav-links{display:flex;gap:1.5rem;font-size:.9rem;flex-wrap:wrap;justify-content:flex-end}
+.nav-links a{color:var(--ink-soft);text-decoration:none}
+.nav-links a:hover{color:var(--green)}
+.crumbs{font-size:.82rem;color:var(--muted);margin:1.5rem 0 0}
+.crumbs a{color:var(--muted)}
+header.card-head{padding:2rem 0 2.5rem;border-bottom:1px solid var(--rule)}
+.eyebrow,.kicker{font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem}
+.kicker{color:var(--green)}
+h1{font-family:"Newsreader",Georgia,serif;font-weight:500;font-size:clamp(2.1rem,4.5vw,3.1rem);line-height:1.08;letter-spacing:-0.015em;margin:0 0 1rem;text-wrap:balance;max-width:40rem}
+h1 em{font-style:italic;color:var(--green)}
+.lede{font-size:1.12rem;color:var(--ink-soft);max-width:40rem;margin:0 0 1.6rem}
+.cta-row{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--green);color:#fff;text-decoration:none;font-weight:600;font-size:.95rem;padding:.8rem 1.5rem;border-radius:4px}
+.btn:hover{background:var(--green-deep)}
+.btn-secondary{background:transparent;color:var(--green);border:1px solid var(--green)}
+.btn-secondary:hover{background:var(--green-soft);color:var(--green-deep)}
+section{padding:3rem 0;border-bottom:1px solid var(--rule)}
+h2{font-family:"Newsreader",Georgia,serif;font-weight:600;font-size:clamp(1.5rem,3vw,2rem);line-height:1.15;margin:0 0 .8rem;text-wrap:balance}
+h3{font-family:"Newsreader",Georgia,serif;font-weight:600;font-size:1.2rem;margin:1.6rem 0 .5rem}
+.prose p{max-width:42rem;color:var(--ink-soft)}
+.prose ul{max-width:42rem;color:var(--ink-soft);padding-left:1.2rem}
+.prose li{margin-bottom:.4rem}
+.two{display:grid;grid-template-columns:1.1fr 1fr;gap:2.5rem;align-items:start}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+.receipt{background:var(--paper-raised);border:1px solid var(--rule);box-shadow:0 1px 2px rgba(32,35,31,.06),0 8px 28px rgba(32,35,31,.07);padding:1.5rem 1.6rem;font-variant-numeric:tabular-nums}
+.receipt h3{font-family:"IBM Plex Mono",monospace;font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 1rem;border-bottom:3px double var(--rule-strong);padding-bottom:.7rem}
+.r-line{display:flex;justify-content:space-between;gap:1rem;padding:.4rem 0;font-size:.9rem;border-bottom:1px dotted var(--rule)}
+.r-line .amt{font-family:"IBM Plex Mono",monospace;font-size:.85rem;white-space:nowrap}
+.r-line .lbl span{display:block;font-size:.72rem;color:var(--muted)}
+.amt.zero{color:var(--rust)}.amt.ok{color:var(--green)}
+.r-total{display:flex;justify-content:space-between;padding-top:.8rem;margin-top:.4rem;border-top:2px solid var(--rule-strong);font-weight:700}
+.r-total .amt{font-family:"IBM Plex Mono",monospace}
+.r-foot{font-size:.72rem;color:var(--muted);margin-top:.9rem}
+table.credits{width:100%;border-collapse:collapse;margin-top:1.2rem;font-size:.9rem}
+table.credits th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:.5rem .6rem .5rem 0;border-bottom:2px solid var(--rule-strong);vertical-align:bottom}
+table.credits td{padding:.7rem .6rem .7rem 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--ink-soft)}
+table.credits td.name{color:var(--ink);font-weight:600;min-width:11rem}
+table.credits td.name small{display:block;font-weight:400;color:var(--muted);font-size:.8rem;margin-top:.25rem;line-height:1.5}
+table.credits td.amt{font-family:"IBM Plex Mono",monospace;white-space:nowrap;color:var(--ink);text-align:right}
+table.credits th.amt{text-align:right}
+@media(max-width:720px){table.credits,table.credits thead,table.credits tbody,table.credits tr,table.credits td{display:block}table.credits thead{display:none}table.credits td{border:0;padding:.15rem 0}table.credits td.amt{text-align:left}table.credits tr{border-bottom:1px solid var(--rule);padding:.8rem 0}table.credits td:not(.name)::before{content:attr(data-h) ": ";font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}}
+.chip{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;padding:.1rem .45rem;border:1px solid var(--rule-strong);border-radius:3px;color:var(--ink-soft);margin:0 .25rem .25rem 0;white-space:nowrap}
+.chip.rust{color:var(--rust);border-color:var(--rust);background:var(--rust-soft)}
+.chip.amber{color:var(--amber);border-color:var(--amber);background:var(--amber-soft)}
+.chip.muted{color:var(--muted);border-style:dashed}
+.trap-card{border-left:3px solid var(--rust);background:var(--rust-soft);padding:1.1rem 1.3rem;font-size:.95rem;max-width:42rem;margin:1rem 0}
+.trap-card strong{color:var(--rust)}
+.trap-card small{display:block;color:var(--muted);margin-top:.5rem;font-size:.8rem}
+.note-card{border-left:3px solid var(--rule-strong);background:var(--paper-raised);padding:1.1rem 1.3rem;font-size:.95rem;max-width:42rem;margin:1rem 0}
+table.plain{border-collapse:collapse;width:100%;max-width:42rem;font-size:.92rem;margin-top:.6rem}
+table.plain td,table.plain th{text-align:left;padding:.4rem .6rem .4rem 0;border-bottom:1px solid var(--rule);vertical-align:top;color:var(--ink-soft)}
+table.plain th{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500}
+table.plain td.amt{font-family:"IBM Plex Mono",monospace;white-space:nowrap;color:var(--ink)}
+table.index{width:100%;border-collapse:collapse;font-size:.92rem;margin:.6rem 0 2rem}
+table.index th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:500;padding:.5rem .6rem .5rem 0;border-bottom:2px solid var(--rule-strong)}
+table.index td{padding:.55rem .6rem .55rem 0;border-bottom:1px solid var(--rule);color:var(--ink-soft);vertical-align:top}
+table.index td.amt,table.index th.amt{font-family:"IBM Plex Mono",monospace;white-space:nowrap;text-align:right}
+table.index td a{font-weight:600}
+.sources{font-size:.85rem;color:var(--ink-soft);max-width:42rem;padding-left:1.2rem}
+.sources li{margin-bottom:.35rem}
+.sources .asof{color:var(--muted);font-family:"IBM Plex Mono",monospace;font-size:.72rem}
+.final{text-align:center;padding:4rem 0;border-bottom:none}
+.final p{margin:0 auto 1.6rem;max-width:36rem;color:var(--ink-soft)}
+footer{border-top:3px double var(--rule-strong);padding:2.5rem 0 3rem}
+.foot-grid{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;font-size:.85rem;color:var(--muted)}
+.foot-grid a{color:var(--ink-soft)}
+.disclaimer{font-size:.75rem;color:var(--muted);max-width:44rem;margin-top:1.5rem;line-height:1.6}
+.answer{border-left:3px solid var(--green);background:var(--paper-raised);padding:1.1rem 1.3rem;max-width:42rem;margin:0 0 1.6rem;font-size:1.05rem;line-height:1.6}
+.answer strong{color:var(--green)}
+.faq details{border-bottom:1px solid var(--rule);max-width:42rem}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.85rem 0;font-family:"Newsreader",Georgia,serif;font-size:1.12rem;font-weight:600;line-height:1.3}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:"IBM Plex Mono",monospace;font-weight:400;color:var(--muted);flex-shrink:0}
+.faq details[open] summary::after{content:"–"}
+.faq summary:hover{color:var(--green)}
+.faq details p{margin:0 0 1rem;font-size:.93rem;color:var(--ink-soft)}
+.related{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:.6rem 1.5rem;padding:0;list-style:none;max-width:52rem;margin:.6rem 0 0}
+.related li{font-size:.92rem;border-bottom:1px dotted var(--rule);padding:.35rem 0}
+.related li small{color:var(--muted)}
+.prose-long p{max-width:42rem;color:var(--ink-soft)}
+.prose-long li{margin-bottom:.5rem}
+.prose-long h2{margin-top:2.2rem}
+</style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Methodology",
+     "item": "https://worthmyfee.com/methodology/"
+    }
+   ]
+  },
+  {
+   "@type": "WebPage",
+   "@id": "https://worthmyfee.com/methodology/",
+   "url": "https://worthmyfee.com/methodology/",
+   "name": "How Worth My Fee scores a card — methodology",
+   "description": "How Worth My Fee scores a premium card: evidence from 12 months of real transactions, conservative point values, elite-status conflicts, and the guarantee arithmetic, with the constants the code uses.",
+   "dateModified": "2026-09-20",
+   "isPartOf": {
+    "@id": "https://worthmyfee.com/#website"
+   },
+   "publisher": {
+    "@id": "https://worthmyfee.com/#organization"
+   }
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav>
+  <div class="wrap nav-inner">
+    <a class="wordmark" href="/">Worth&nbsp;My&nbsp;Fee<span class="q">?</span></a>
+    <div class="nav-links">
+      <a href="/#how">How it works</a>
+      <a href="/cards/">Cards</a>
+      <a href="/methodology/">Methodology</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#faq">FAQ</a>
+    </div>
+  </div>
+</nav>
+
+<header class="card-head">
+  <div class="wrap">
+    <div class="kicker">Methodology · every constant the code uses</div>
+    <h1>How the audit is scored.</h1>
+    <p class="answer"><strong>In one line:</strong> every credit is matched against 12 months of your real transactions, valued at conservative point values, netted against what redeeming it costs you elsewhere, and compared with every cheaper card in the family before a verdict is issued.</p>
+    <p class="lede">Worth My Fee is paid by its users and by no one else: no affiliate links, no issuer relationships, ever. Every number below comes from the same code that produces your report. The catalog it scores against is <strong>91 cards and 229 credits</strong>, each with a citation to the issuer’s own page and an as-of date; 82 values the issuer states ambiguously are marked unverified and scored conservatively.</p>
+  </div>
+</header>
+
+<section>
+  <div class="wrap prose prose-long">
+    <h2>1. Evidence, not intentions</h2>
+    <p>Each credit is matched against 12 months of your real transactions (through Plaid) by statement string and by Plaid’s category for the charge. A hotel brand counts only on a travel-coded charge; a phrase like “resort” never counts on a ski shop; portal-only credits (The Edit, Amex Travel, Capital One Travel, Citi Travel, Delta Stays) count as <em>used</em> only when the charge posts under the portal’s own statement string. A direct stay at the same chain makes the credit reachable, never used. Money movement (transfers, interest, fees) is never evidence and never earns points. Refunds are netted against the charge they reverse; an issuer’s statement credit posted under a merchant’s name is left alone.</p>
+    <p>Two things beat the text matcher: Plaid’s merchant entity (a charge Plaid resolves to the same merchant as one that matched counts too, under the same category rules), and the issuer’s own statement credits. A “RESY DINING CREDIT” posted to your card means the credit was used, whatever the charges looked like, and is counted at the posted dollars.</p>
+
+    <h2>2. Short history is scaled carefully, or not at all</h2>
+    <ul>
+      <li>Under <strong>30 days</strong> of history nothing is scaled and no keep-or-cancel call is made.</li>
+      <li>Evidence is scaled to a year only when it recurs (matches in at least <strong>2 calendar months</strong>) and never by more than <strong>4×</strong>; a card is judged at its own pace only after <strong>90 days</strong> on that card.</li>
+      <li>Every card is provisional on its own span until a full year is in, and provisional verdicts are excluded from the guarantee arithmetic.</li>
+    </ul>
+
+    <h2>3. Conservative point values</h2>
+    <p>Points are valued at what a normal cardholder reliably gets, below enthusiast “maximizer” figures. The opportunity-cost floor is a no-fee 2% cash-back card, so earning below it is worth nothing incremental. Per-card exceptions (the Sapphire Reserve’s 1:1 Hyatt transfer) are stated in the catalog.</p>
+    <table class="plain"><thead><tr><th>Program</th><th>Value</th><th>Basis</th></tr></thead><tbody><tr><td>Chase Ultimate Rewards</td><td class="amt">1.5¢</td><td><small>Reflects the Oct 2026 UR→Hyatt 4:3 devaluation; portal floor is 1.0–1.5.</small></td></tr>
+<tr><td>Amex Membership Rewards</td><td class="amt">1.5¢</td><td><small>Transfer-partner value for a non-optimizer; cash-out floor is 0.6.</small></td></tr>
+<tr><td>Citi ThankYou</td><td class="amt">1.5¢</td><td><small>Transfer partners; cash floor 1.0.</small></td></tr>
+<tr><td>Capital One Miles</td><td class="amt">1.5¢</td><td><small>Travel-eraser floor is 1.0; transfers above that.</small></td></tr>
+<tr><td>Delta SkyMiles</td><td class="amt">1.2¢</td><td><small></small></td></tr>
+<tr><td>United MileagePlus</td><td class="amt">1.2¢</td><td><small></small></td></tr>
+<tr><td>American AAdvantage</td><td class="amt">1.4¢</td><td><small></small></td></tr>
+<tr><td>Southwest Rapid Rewards</td><td class="amt">1.3¢</td><td><small>Wanna Get Away pricing is nearly fixed-value.</small></td></tr>
+<tr><td>Marriott Bonvoy</td><td class="amt">0.7¢</td><td><small></small></td></tr>
+<tr><td>Hilton Honors</td><td class="amt">0.5¢</td><td><small></small></td></tr>
+<tr><td>IHG One Rewards</td><td class="amt">0.6¢</td><td><small></small></td></tr>
+<tr><td>BofA Premium Rewards points</td><td class="amt">1.0¢</td><td><small>Cash-equivalent.</small></td></tr>
+<tr><td>U.S. Bank points</td><td class="amt">1.0¢</td><td><small>Post-Dec-2025 nerf; was 1.5 via mobile wallet.</small></td></tr>
+<tr><td>Wells Fargo Rewards</td><td class="amt">1.0¢</td><td><small>Cash-equivalent; transfers add upside.</small></td></tr>
+<tr><td>World of Hyatt</td><td class="amt">1.7¢</td><td><small>Award-chart program; 1.7 is a mid-category cash-rate equivalent.</small></td></tr>
+<tr><td>Bilt Points</td><td class="amt">1.5¢</td><td><small>Transfer partners (Hyatt, Alaska, others); Bilt Travel floor is 1.25.</small></td></tr>
+<tr><td>JetBlue TrueBlue</td><td class="amt">1.3¢</td><td><small>Revenue-based; near fixed value.</small></td></tr>
+<tr><td>Wyndham Rewards</td><td class="amt">1.0¢</td><td><small>Flat 7,500/15,000/30,000-point free nights; ~1¢ at the economy tier.</small></td></tr>
+<tr><td>Blue Cash Reward Dollars</td><td class="amt">1.0¢</td><td><small>Cash-equivalent.</small></td></tr>
+<tr><td>Capital One cash back</td><td class="amt">1.0¢</td><td><small>Cash-equivalent.</small></td></tr>
+<tr><td>Robinhood cash back</td><td class="amt">1.0¢</td><td><small>1¢ per point only as a deposit to a Robinhood investing account (required to redeem); a statement credit pays less.</small></td></tr>
+<tr><td>Atmos Rewards (Alaska + Hawaiian)</td><td class="amt">1.4¢</td><td><small>Distance-based partner awards carry the upside; 1.4 is a domestic-award average.</small></td></tr></tbody></table>
+
+    <h2>4. Status, lounges, and the portal trap</h2>
+    <p>Card-granted elite status is valued by ladder rung against what you already hold on your own (including tiers a membership implies, such as IHG Diamond from InterContinental Royal Ambassador); status never stacks across cards. Lounge access is valued once per observed flight day across the portfolio, credited to the cheapest card whose network covers it, with pricier networks keeping only their premium over it. The conflict rules:</p>
+    <ul><li><strong>Portal hotel bookings void elite-status recognition.</strong> This credit only works on prepaid bookings made through the card’s travel portal, which makes the portal — not the hotel — the merchant of record. Major hotel programs treat these as third-party bookings: elite benefits are not honored at check-in (upgrades, breakfast, late checkout), and the stay earns no points. If you hold hotel status, redeeming this credit typically costs more per stay than the credit returns. <small>Sources: <a href="https://www.marriott.com/loyalty/terms/default.mi" rel="noopener">Marriott Bonvoy Terms § 2.1.e — stays booked through third-party online travel channels are not eligible for points or elite benefits</a>; <a href="https://www.hilton.com/en/hilton-honors/honors-terms/" rel="noopener">Hilton Honors Terms — third-party/prepaid bookings are ineligible rates for points and elite benefits</a>; <a href="https://www.ihg.com/onerewards/content/us/en/terms-and-conditions/member-tcs" rel="noopener">IHG One Rewards Membership Terms — non-qualifying rates include stays booked through third parties</a>; <a href="https://world.hyatt.com/content/gp/en/rewards/terms.html" rel="noopener">World of Hyatt Terms — eligible rates exclude third-party bookings</a></small></li>
+<li><strong>Portal hotel bookings don’t count toward status requalification.</strong> Because the portal is the merchant of record, these stays post no elite qualifying nights. If you are actively requalifying for status, every stay routed through the portal to capture this credit is a night that doesn’t count — and a shortfall at year-end can cost an entire tier, worth far more than the credit. Fires independently of current status, so it also catches users mid-pursuit of their first tier. <small>Sources: <a href="https://www.marriott.com/loyalty/terms/default.mi" rel="noopener">Marriott Bonvoy Terms § 2.1.e — ineligible stays earn no elite night credit</a>; <a href="https://www.hilton.com/en/hilton-honors/honors-terms/" rel="noopener">Hilton Honors Terms — ineligible rates earn no tier credit toward status</a>; <a href="https://www.ihg.com/onerewards/content/us/en/terms-and-conditions/member-tcs" rel="noopener">IHG One Rewards Membership Terms — non-qualifying stays do not count toward tier status</a></small></li></ul>
+    <p>Every card carrying a portal hotel credit is listed on the <a href="/credits/portal-hotel/">portal hotel credits</a> page.</p>
+
+    <h2>5. The guarantee</h2>
+    <p>A paid audit must find at least three times its price in fees you can stop paying (firm cancel or downgrade verdicts) plus credits your spending already qualifies for that were landing on other cards. Portal-only credits are shown separately and never count. The same function computes the number on your report and the refund decision; inside 30 days of the first charge, an audit below the threshold is refunded on request without argument, once per person. <a href="/terms.html#refunds">Full terms</a>.</p>
+
+    <h2>6. The catalog</h2>
+    <p>Every fee-bearing card and every credit it advertises is itemized on the <a href="/cards/">cards pages</a>, with the fine print, the traps and the downgrade path, and cited to the issuer page with the date it was last checked. A weekly job diffs those pages against the catalog so it notices when terms change. Things the audit is known not to see yet are on the <a href="https://app.worthmyfee.com/known-issues">known limitations page</a>; a scored sample portfolio is at <a href="https://app.worthmyfee.com/demo">the sample audit</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <span>© 2026 Worth My Fee</span>
+      <span><a href="/about/">About</a> · <a href="/methodology/">Methodology</a> · <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy Policy</a> · <a href="mailto:hello@worthmyfee.com">hello@worthmyfee.com</a></span>
+    </div>
+    <p class="disclaimer">Worth My Fee is an independent product and is not affiliated with, endorsed by, or sponsored by any card issuer, bank, or loyalty program. Card names and program names are the trademarks of their respective owners and are referenced for identification only. Credit values and terms are taken from the issuer pages cited on this page, as of the dates shown; issuers change terms often, and we re-check the cited pages weekly. Worth My Fee provides informational analysis of card benefits and does not provide financial, investment, or legal advice.</p>
+  </div>
+</footer>
+</body>
+</html>
