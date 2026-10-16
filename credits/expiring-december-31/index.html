@@ -146,6 +146,12 @@ footer{border-top:3px double var(--rule-strong);padding:2.5rem 0 3rem}
 .mine-actions button:hover{background:var(--green-deep);color:#fff}
 .mine-msg{font-size:.85rem;color:var(--muted);margin-top:.6rem;min-height:1.2em}
 table.credits th.amt{white-space:nowrap}
+.mine-email{margin-top:1.6rem;border-top:1px dotted var(--rule-strong);padding-top:1.2rem}
+.email-row{display:flex;gap:.6rem;flex-wrap:wrap;max-width:32rem}
+.email-row input{flex:1 1 14rem;font:inherit;padding:.65rem .8rem;border:1px solid var(--rule-strong);border-radius:4px;background:var(--paper)}
+.email-row button{font:inherit;font-weight:600;font-size:.92rem;padding:.7rem 1.2rem;border-radius:4px;cursor:pointer;border:1px solid var(--green);background:var(--green);color:#fff}
+.email-row button:disabled{opacity:.6;cursor:default}
+.mine-email .news{display:flex;gap:.5rem;align-items:baseline;font-size:.88rem;color:var(--ink-soft);margin-top:.6rem}
 </style>
 <!-- Marketing-site-only product analytics (PostHog). Never present in the signed-in
      application at app.worthmyfee.com — see privacy.html for what this can and cannot see:
@@ -246,7 +252,7 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
     <p class="byline">Catalog maintained by <a href="/about/">Eric Carr</a>, founder of Worth My Fee. Paid by users, never by issuers.</p>
     <h1>Card credits that expire <em>December 31</em>, 2026.</h1>
     <p class="answer">Calendar-year credits don’t care when you opened the card: whatever is unused on December 31 is gone. Across 39 annual-fee cards that is 133 credits: 52 annual credits with the whole year’s value, 20 July–December halves, 12 fourth-quarter credits and 49 December monthlies. The Amex Platinum Card for Schwab alone has up to $1,687 that resets.</p>
-    <p class="lede">Pick the cards you hold for your own list, tick off what you have used, and put a reminder on your calendar. It all runs in this page: nothing about your cards is sent anywhere.</p>
+    <p class="lede">Pick the cards you hold for your own list, tick off what you have used, and put a reminder on your calendar. It all runs in this page: nothing about your cards is sent anywhere unless you ask for the email reminder.</p>
   </div>
 </header>
 
@@ -259,6 +265,12 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
       <input type="search" id="pick-filter" placeholder="Filter: platinum, sapphire, delta…" autocomplete="off">
       <div class="pick-issuers" id="pick-list"></div>
       <div class="mine" id="mine" aria-live="polite"></div>
+      <form class="mine-email" id="dec31-email" hidden>
+        <label for="dec31-email-input" class="eyebrow" style="display:block">Or get it by email on December 1</label>
+        <div class="email-row"><input type="email" id="dec31-email-input" required autocomplete="email" placeholder="you@example.com"><button type="submit">Email me December 1</button></div>
+        <label class="news"><input type="checkbox" id="dec31-news"> Also send occasional Worth My Fee product news</label>
+        <p class="mine-msg" id="dec31-email-msg" aria-live="polite">We send a confirmation link first. Then one email with your list on December 1, and your address is deleted after it unless you ticked product news. <a href="/privacy.html">Privacy policy</a>.</p>
+      </form>
     </div>
   </div>
 </section>
@@ -270,14 +282,14 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
     <table class="credits">
 <thead><tr><th>Card</th><th>Credit</th><th class="amt">Up to</th><th>Where it works</th><th>Flags</th></tr></thead>
 <tbody><tr>
-<td class="name"><a href="/cards/jp-morgan-reserve/">Chase J.P. Morgan Reserve</a><small>$795 annual fee</small></td>
+<td class="name"><a href="/cards/chase-sapphire-reserve/">Chase Sapphire Reserve</a><small>$795 annual fee</small></td>
 <td data-h="Credit">The Edit Hotel Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
 <td class="amt" data-h="Up to">$500</td>
 <td data-h="Where it works">The Edit by Chase Travel only (prepaid hotels); single charge of $400 or more; 2-night minimum</td>
 <td data-h="Flags"><span class="chip">portal, status honored</span> <span class="chip muted">unverified</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/chase-sapphire-reserve/">Chase Sapphire Reserve</a><small>$795 annual fee</small></td>
+<td class="name"><a href="/cards/jp-morgan-reserve/">Chase J.P. Morgan Reserve</a><small>$795 annual fee</small></td>
 <td data-h="Credit">The Edit Hotel Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
 <td class="amt" data-h="Up to">$500</td>
 <td data-h="Where it works">The Edit by Chase Travel only (prepaid hotels); single charge of $400 or more; 2-night minimum</td>
@@ -291,6 +303,13 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip">portal, status honored</span></td>
 </tr>
 <tr>
+<td class="name"><a href="/cards/boa-premium-rewards-elite/">Bank of America Premium Rewards Elite</a><small>$550 annual fee</small></td>
+<td data-h="Credit">$300 Airline Incidental Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$300</td>
+<td data-h="Where it works">Any qualifying purchase</td>
+<td data-h="Flags">—</td>
+</tr>
+<tr>
 <td class="name"><a href="/cards/amex-business-gold/">American Express Business Gold</a><small>$375 annual fee</small></td>
 <td data-h="Credit">ChatGPT Business Credit<br><small style="color:var(--muted)">Enroll first</small></td>
 <td class="amt" data-h="Up to">$300</td>
@@ -302,41 +321,6 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Credit">ChatGPT Business Credit<br><small style="color:var(--muted)">Enroll first</small></td>
 <td class="amt" data-h="Up to">$300</td>
 <td data-h="Where it works">OpenAI, ChatGPT</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/amex-platinum/">American Express Platinum Card</a><small>$895 annual fee</small></td>
-<td data-h="Credit">Equinox Credit<br><small style="color:var(--muted)">Enroll first</small></td>
-<td class="amt" data-h="Up to">$300</td>
-<td data-h="Where it works">Equinox</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/amex-platinum-morgan-stanley/">American Express Platinum Card for Morgan Stanley</a><small>$895 annual fee</small></td>
-<td data-h="Credit">Equinox Credit<br><small style="color:var(--muted)">Enroll first</small></td>
-<td class="amt" data-h="Up to">$300</td>
-<td data-h="Where it works">Equinox</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip muted">unverified</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/amex-platinum-schwab/">American Express Platinum Card for Schwab</a><small>$895 annual fee</small></td>
-<td data-h="Credit">Equinox Credit<br><small style="color:var(--muted)">Enroll first</small></td>
-<td class="amt" data-h="Up to">$300</td>
-<td data-h="Where it works">Equinox</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip muted">unverified</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/boa-premium-rewards-elite/">Bank of America Premium Rewards Elite</a><small>$550 annual fee</small></td>
-<td data-h="Credit">$300 Airline Incidental Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$300</td>
-<td data-h="Where it works">Any qualifying purchase</td>
-<td data-h="Flags">—</td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/chase-ritz-carlton/">Chase Ritz-Carlton Credit Card</a><small>$450 annual fee</small></td>
-<td data-h="Credit">$300 Annual Travel Credit (airline incidentals)<br><small style="color:var(--muted)">Activate the offer first</small></td>
-<td class="amt" data-h="Up to">$300</td>
-<td data-h="Where it works">Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more</td>
 <td data-h="Flags"><span class="chip amber">enroll first</span></td>
 </tr>
 <tr>
@@ -354,11 +338,53 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip rust">status trap</span></td>
 </tr>
 <tr>
+<td class="name"><a href="/cards/amex-platinum/">American Express Platinum Card</a><small>$895 annual fee</small></td>
+<td data-h="Credit">Equinox Credit<br><small style="color:var(--muted)">Enroll first</small></td>
+<td class="amt" data-h="Up to">$300</td>
+<td data-h="Where it works">Equinox</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/amex-platinum-morgan-stanley/">American Express Platinum Card for Morgan Stanley</a><small>$895 annual fee</small></td>
+<td data-h="Credit">Equinox Credit<br><small style="color:var(--muted)">Enroll first</small></td>
+<td class="amt" data-h="Up to">$300</td>
+<td data-h="Where it works">Equinox</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip muted">unverified</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/amex-platinum-schwab/">American Express Platinum Card for Schwab</a><small>$895 annual fee</small></td>
+<td data-h="Credit">Equinox Credit<br><small style="color:var(--muted)">Enroll first</small></td>
+<td class="amt" data-h="Up to">$300</td>
+<td data-h="Where it works">Equinox</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip muted">unverified</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/chase-ritz-carlton/">Chase Ritz-Carlton Credit Card</a><small>$450 annual fee</small></td>
+<td data-h="Credit">$300 Annual Travel Credit (airline incidentals)<br><small style="color:var(--muted)">Activate the offer first</small></td>
+<td class="amt" data-h="Up to">$300</td>
+<td data-h="Where it works">Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span></td>
+</tr>
+<tr>
 <td class="name"><a href="/cards/amex-business-platinum/">American Express Business Platinum</a><small>$895 annual fee</small></td>
 <td data-h="Credit">Adobe Credit<br><small style="color:var(--muted)">Enroll first</small></td>
 <td class="amt" data-h="Up to">$250</td>
 <td data-h="Where it works">Adobe; single charge of $600 or more</td>
 <td data-h="Flags"><span class="chip amber">enroll first</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/chase-sapphire-reserve/">Chase Sapphire Reserve</a><small>$795 annual fee</small></td>
+<td data-h="Credit">$250 Select Hotels Credit (2026)<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$250</td>
+<td data-h="Where it works">Chase Travel only (prepaid hotels); single charge of $250 or more; 2-night minimum</td>
+<td data-h="Flags"><span class="chip">portal, status honored</span> <span class="chip">ends 2026-12-31</span> <span class="chip muted">unverified</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/citi-prestige/">Citi Prestige</a><small>$495 annual fee</small></td>
+<td data-h="Credit">$250 Annual Travel Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$250</td>
+<td data-h="Where it works">Any qualifying purchase</td>
+<td data-h="Flags">—</td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/amex-delta-reserve-business/">American Express Delta SkyMiles Reserve Business</a><small>$650 annual fee</small></td>
@@ -375,13 +401,6 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip">portal, status honored</span> <span class="chip">ends 2026-12-31</span> <span class="chip muted">unverified</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/chase-sapphire-reserve/">Chase Sapphire Reserve</a><small>$795 annual fee</small></td>
-<td data-h="Credit">$250 Select Hotels Credit (2026)<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$250</td>
-<td data-h="Where it works">Chase Travel only (prepaid hotels); single charge of $250 or more; 2-night minimum</td>
-<td data-h="Flags"><span class="chip">portal, status honored</span> <span class="chip">ends 2026-12-31</span> <span class="chip muted">unverified</span></td>
-</tr>
-<tr>
 <td class="name"><a href="/cards/chase-sapphire-reserve-business/">Chase Sapphire Reserve for Business</a><small>$795 annual fee</small></td>
 <td data-h="Credit">$250 Select Hotels Credit (2026)<br><small style="color:var(--muted)">Automatic once you spend</small></td>
 <td class="amt" data-h="Up to">$250</td>
@@ -389,11 +408,11 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip">portal, status honored</span> <span class="chip">ends 2026-12-31</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/citi-prestige/">Citi Prestige</a><small>$495 annual fee</small></td>
-<td data-h="Credit">$250 Annual Travel Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$250</td>
-<td data-h="Where it works">Any qualifying purchase</td>
-<td data-h="Flags">—</td>
+<td class="name"><a href="/cards/amex-green/">American Express Green Card</a><small>$150 annual fee</small></td>
+<td data-h="Credit">CLEAR Plus Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$219</td>
+<td data-h="Where it works">CLEAR</td>
+<td data-h="Flags"><span class="chip muted">unverified</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/amex-business-platinum/">American Express Business Platinum</a><small>$895 annual fee</small></td>
@@ -403,14 +422,14 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags">—</td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/amex-centurion/">American Express Centurion Card</a><small>$5,000 annual fee</small></td>
-<td data-h="Credit">CLEAR Plus Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="name"><a href="/cards/amex-hilton-aspire/">Hilton Honors American Express Aspire Card</a><small>$550 annual fee</small></td>
+<td data-h="Credit">CLEAR Plus Membership Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
 <td class="amt" data-h="Up to">$219</td>
 <td data-h="Where it works">CLEAR</td>
 <td data-h="Flags"><span class="chip muted">unverified</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/amex-green/">American Express Green Card</a><small>$150 annual fee</small></td>
+<td class="name"><a href="/cards/amex-centurion/">American Express Centurion Card</a><small>$5,000 annual fee</small></td>
 <td data-h="Credit">CLEAR Plus Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
 <td class="amt" data-h="Up to">$219</td>
 <td data-h="Where it works">CLEAR</td>
@@ -438,18 +457,25 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip muted">unverified</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/amex-hilton-aspire/">Hilton Honors American Express Aspire Card</a><small>$550 annual fee</small></td>
-<td data-h="Credit">CLEAR Plus Membership Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$219</td>
-<td data-h="Where it works">CLEAR</td>
-<td data-h="Flags"><span class="chip muted">unverified</span></td>
-</tr>
-<tr>
 <td class="name"><a href="/cards/amex-business-platinum/">American Express Business Platinum</a><small>$895 annual fee</small></td>
 <td data-h="Credit">Airline Fee Credit<br><small style="color:var(--muted)">Enroll first</small></td>
 <td class="amt" data-h="Up to">$200</td>
 <td data-h="Where it works">Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more</td>
 <td data-h="Flags"><span class="chip amber">enroll first</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/citi-aadvantage-executive/">Citi / AAdvantage Executive</a><small>$695 annual fee</small></td>
+<td data-h="Credit">Omni Free Night Reward<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$200</td>
+<td data-h="Where it works">Omni Hotels &amp; Resorts</td>
+<td data-h="Flags"><span class="chip muted">unverified</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/citi-strata-elite/">Citi Strata Elite</a><small>$595 annual fee</small></td>
+<td data-h="Credit">Splurge Credit<br><small style="color:var(--muted)">Activate the offer first</small></td>
+<td class="amt" data-h="Up to">$200</td>
+<td data-h="Where it works">1stDibs, American Airlines, Best Buy, Future Personal Training and 1 more</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip muted">unverified</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/amex-delta-platinum-business/">American Express Delta SkyMiles Platinum Business</a><small>$350 annual fee</small></td>
@@ -466,6 +492,13 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip rust">status trap</span></td>
 </tr>
 <tr>
+<td class="name"><a href="/cards/chase-sapphire-reserve-business/">Chase Sapphire Reserve for Business</a><small>$795 annual fee</small></td>
+<td data-h="Credit">Google Workspace Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$200</td>
+<td data-h="Where it works">Google Workspace</td>
+<td data-h="Flags"><span class="chip">ends 2027-12-31</span></td>
+</tr>
+<tr>
 <td class="name"><a href="/cards/amex-platinum/">American Express Platinum Card</a><small>$895 annual fee</small></td>
 <td data-h="Credit">Airline Fee Credit<br><small style="color:var(--muted)">Enroll first</small></td>
 <td class="amt" data-h="Up to">$200</td>
@@ -508,25 +541,11 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip muted">unverified</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/chase-sapphire-reserve-business/">Chase Sapphire Reserve for Business</a><small>$795 annual fee</small></td>
-<td data-h="Credit">Google Workspace Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$200</td>
-<td data-h="Where it works">Google Workspace</td>
-<td data-h="Flags"><span class="chip">ends 2027-12-31</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/citi-aadvantage-executive/">Citi / AAdvantage Executive</a><small>$695 annual fee</small></td>
-<td data-h="Credit">Omni Free Night Reward<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$200</td>
-<td data-h="Where it works">Omni Hotels &amp; Resorts</td>
-<td data-h="Flags"><span class="chip muted">unverified</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/citi-strata-elite/">Citi Strata Elite</a><small>$595 annual fee</small></td>
-<td data-h="Credit">Splurge Credit<br><small style="color:var(--muted)">Activate the offer first</small></td>
-<td class="amt" data-h="Up to">$200</td>
-<td data-h="Where it works">1stDibs, American Airlines, Best Buy, Future Personal Training and 1 more</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip muted">unverified</span></td>
+<td class="name"><a href="/cards/boa-premium-rewards-elite/">Bank of America Premium Rewards Elite</a><small>$550 annual fee</small></td>
+<td data-h="Credit">$150 Lifestyle Conveniences Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$150</td>
+<td data-h="Where it works">Any qualifying purchase</td>
+<td data-h="Flags">—</td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/amex-business-gold/">American Express Business Gold</a><small>$375 annual fee</small></td>
@@ -557,11 +576,18 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip rust">status trap</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/boa-premium-rewards-elite/">Bank of America Premium Rewards Elite</a><small>$550 annual fee</small></td>
-<td data-h="Credit">$150 Lifestyle Conveniences Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$150</td>
-<td data-h="Where it works">Any qualifying purchase</td>
+<td class="name"><a href="/cards/citi-aadvantage-executive/">Citi / AAdvantage Executive</a><small>$695 annual fee</small></td>
+<td data-h="Credit">Avis / Budget Rental Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$120</td>
+<td data-h="Where it works">Avis Rent A Car, Avis Car Rental, Budget Rent A Car</td>
 <td data-h="Flags">—</td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/robinhood-platinum-card/">Robinhood Platinum Card</a><small>$695 annual fee</small></td>
+<td data-h="Credit">DashPass Membership<br><small style="color:var(--muted)">Enroll first; a complimentary subscription: worth something only if you would pay for it</small></td>
+<td class="amt" data-h="Up to">$120</td>
+<td data-h="Where it works">DoorDash</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/amex-platinum/">American Express Platinum Card</a><small>$895 annual fee</small></td>
@@ -585,34 +611,6 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip muted">unverified</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/citi-aadvantage-executive/">Citi / AAdvantage Executive</a><small>$695 annual fee</small></td>
-<td data-h="Credit">Avis / Budget Rental Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$120</td>
-<td data-h="Where it works">Avis Rent A Car, Avis Car Rental, Budget Rent A Car</td>
-<td data-h="Flags">—</td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/robinhood-platinum-card/">Robinhood Platinum Card</a><small>$695 annual fee</small></td>
-<td data-h="Credit">DashPass Membership<br><small style="color:var(--muted)">Enroll first; a complimentary subscription: worth something only if you would pay for it</small></td>
-<td class="amt" data-h="Up to">$120</td>
-<td data-h="Where it works">DoorDash</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/amex-delta-gold/">American Express Delta SkyMiles Gold</a><small>$150 annual fee</small></td>
-<td data-h="Credit">Delta Stays Hotel Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$100</td>
-<td data-h="Where it works">Delta Stays only (prepaid hotels)</td>
-<td data-h="Flags"><span class="chip rust">status trap</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/amex-platinum-schwab/">American Express Platinum Card for Schwab</a><small>$895 annual fee</small></td>
-<td data-h="Credit">Schwab Appreciation Bonus<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$100</td>
-<td data-h="Where it works">Schwab Appreciation Bonus, Charles Schwab</td>
-<td data-h="Flags"><span class="chip muted">unverified</span></td>
-</tr>
-<tr>
 <td class="name"><a href="/cards/boa-premium-rewards/">Bank of America Premium Rewards</a><small>$95 annual fee</small></td>
 <td data-h="Credit">$100 Airline Incidental Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
 <td class="amt" data-h="Up to">$100</td>
@@ -632,6 +630,20 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td class="amt" data-h="Up to">$100</td>
 <td data-h="Where it works">Citi Travel only (prepaid hotels); single charge of $500 or more</td>
 <td data-h="Flags"><span class="chip rust">status trap</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/amex-delta-gold/">American Express Delta SkyMiles Gold</a><small>$150 annual fee</small></td>
+<td data-h="Credit">Delta Stays Hotel Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$100</td>
+<td data-h="Where it works">Delta Stays only (prepaid hotels)</td>
+<td data-h="Flags"><span class="chip rust">status trap</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/amex-platinum-schwab/">American Express Platinum Card for Schwab</a><small>$895 annual fee</small></td>
+<td data-h="Credit">Schwab Appreciation Bonus<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$100</td>
+<td data-h="Where it works">Schwab Appreciation Bonus, Charles Schwab</td>
+<td data-h="Flags"><span class="chip muted">unverified</span></td>
 </tr></tbody>
 </table>
   </div>
@@ -692,13 +704,6 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip rust">status trap</span> <span class="chip muted">unverified</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/chase-sapphire-reserve-business/">Chase Sapphire Reserve for Business</a><small>$795 annual fee</small></td>
-<td data-h="Credit">ZipRecruiter Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$200</td>
-<td data-h="Where it works">ZipRecruiter</td>
-<td data-h="Flags"><span class="chip">ends 2027-12-31</span></td>
-</tr>
-<tr>
 <td class="name"><a href="/cards/amex-hilton-aspire/">Hilton Honors American Express Aspire Card</a><small>$550 annual fee</small></td>
 <td data-h="Credit">Semiannual Hilton Resort Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
 <td class="amt" data-h="Up to">$200</td>
@@ -706,18 +711,11 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags">—</td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/jp-morgan-reserve/">Chase J.P. Morgan Reserve</a><small>$795 annual fee</small></td>
-<td data-h="Credit">Exclusive Tables Dining Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$150</td>
-<td data-h="Where it works">OpenTable</td>
-<td data-h="Flags"><span class="chip muted">unverified</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/jp-morgan-reserve/">Chase J.P. Morgan Reserve</a><small>$795 annual fee</small></td>
-<td data-h="Credit">StubHub / viagogo Credit<br><small style="color:var(--muted)">Activate the offer first</small></td>
-<td class="amt" data-h="Up to">$150</td>
-<td data-h="Where it works">StubHub, viagogo</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">ends 2027-12-31</span> <span class="chip muted">unverified</span></td>
+<td class="name"><a href="/cards/chase-sapphire-reserve-business/">Chase Sapphire Reserve for Business</a><small>$795 annual fee</small></td>
+<td data-h="Credit">ZipRecruiter Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$200</td>
+<td data-h="Where it works">ZipRecruiter</td>
+<td data-h="Flags"><span class="chip">ends 2027-12-31</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/chase-sapphire-reserve/">Chase Sapphire Reserve</a><small>$795 annual fee</small></td>
@@ -732,6 +730,20 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td class="amt" data-h="Up to">$150</td>
 <td data-h="Where it works">StubHub, viagogo</td>
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">ends 2027-12-31</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/jp-morgan-reserve/">Chase J.P. Morgan Reserve</a><small>$795 annual fee</small></td>
+<td data-h="Credit">Exclusive Tables Dining Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$150</td>
+<td data-h="Where it works">OpenTable</td>
+<td data-h="Flags"><span class="chip muted">unverified</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/jp-morgan-reserve/">Chase J.P. Morgan Reserve</a><small>$795 annual fee</small></td>
+<td data-h="Credit">StubHub / viagogo Credit<br><small style="color:var(--muted)">Activate the offer first</small></td>
+<td class="amt" data-h="Up to">$150</td>
+<td data-h="Where it works">StubHub, viagogo</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">ends 2027-12-31</span> <span class="chip muted">unverified</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/robinhood-platinum-card/">Robinhood Platinum Card</a><small>$695 annual fee</small></td>
@@ -913,11 +925,32 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip">use it monthly</span></td>
 </tr>
 <tr>
+<td class="name"><a href="/cards/chase-sapphire-reserve/">Chase Sapphire Reserve</a><small>$795 annual fee</small></td>
+<td data-h="Credit">DoorDash Monthly Promos<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
+<td class="amt" data-h="Up to">$25</td>
+<td data-h="Where it works">DoorDash</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/jp-morgan-reserve/">Chase J.P. Morgan Reserve</a><small>$795 annual fee</small></td>
+<td data-h="Credit">DoorDash Monthly Promos<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
+<td class="amt" data-h="Up to">$25</td>
+<td data-h="Where it works">DoorDash</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span> <span class="chip muted">unverified</span></td>
+</tr>
+<tr>
 <td class="name"><a href="/cards/amex-bonvoy-brilliant/">American Express Marriott Bonvoy Brilliant</a><small>$650 annual fee</small></td>
 <td data-h="Credit">Brilliant Dining Credit<br><small style="color:var(--muted)">Enroll first</small></td>
 <td class="amt" data-h="Up to">$25</td>
 <td data-h="Where it works">Any qualifying purchase</td>
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/chase-sapphire-reserve-business/">Chase Sapphire Reserve for Business</a><small>$795 annual fee</small></td>
+<td data-h="Credit">DoorDash Monthly Promos<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
+<td class="amt" data-h="Up to">$25</td>
+<td data-h="Where it works">DoorDash</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/amex-platinum/">American Express Platinum Card</a><small>$895 annual fee</small></td>
@@ -941,35 +974,14 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip muted">unverified</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/jp-morgan-reserve/">Chase J.P. Morgan Reserve</a><small>$795 annual fee</small></td>
-<td data-h="Credit">DoorDash Monthly Promos<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
-<td class="amt" data-h="Up to">$25</td>
-<td data-h="Where it works">DoorDash</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span> <span class="chip muted">unverified</span></td>
-</tr>
-<tr>
 <td class="name"><a href="/cards/chase-sapphire-reserve/">Chase Sapphire Reserve</a><small>$795 annual fee</small></td>
-<td data-h="Credit">DoorDash Monthly Promos<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
-<td class="amt" data-h="Up to">$25</td>
-<td data-h="Where it works">DoorDash</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/chase-sapphire-reserve-business/">Chase Sapphire Reserve for Business</a><small>$795 annual fee</small></td>
-<td data-h="Credit">DoorDash Monthly Promos<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
-<td class="amt" data-h="Up to">$25</td>
-<td data-h="Where it works">DoorDash</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/jp-morgan-reserve/">Chase J.P. Morgan Reserve</a><small>$795 annual fee</small></td>
 <td data-h="Credit">Apple TV+ &amp; Apple Music Subscriptions<br><small style="color:var(--muted)">Enroll first; a complimentary subscription: worth something only if you would pay for it</small></td>
 <td class="amt" data-h="Up to">$24</td>
 <td data-h="Where it works">Apple TV+, Apple Music</td>
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-06-22</span> <span class="chip muted">unverified</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/chase-sapphire-reserve/">Chase Sapphire Reserve</a><small>$795 annual fee</small></td>
+<td class="name"><a href="/cards/jp-morgan-reserve/">Chase J.P. Morgan Reserve</a><small>$795 annual fee</small></td>
 <td data-h="Credit">Apple TV+ &amp; Apple Music Subscriptions<br><small style="color:var(--muted)">Enroll first; a complimentary subscription: worth something only if you would pay for it</small></td>
 <td class="amt" data-h="Up to">$24</td>
 <td data-h="Where it works">Apple TV+, Apple Music</td>
@@ -997,18 +1009,18 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/chase-united-club/">Chase United Club</a><small>$695 annual fee</small></td>
-<td data-h="Credit">Instacart Credit<br><small style="color:var(--muted)">Enroll first</small></td>
-<td class="amt" data-h="Up to">$20</td>
-<td data-h="Where it works">Instacart</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
-</tr>
-<tr>
 <td class="name"><a href="/cards/robinhood-platinum-card/">Robinhood Platinum Card</a><small>$695 annual fee</small></td>
 <td data-h="Credit">Dining Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
 <td class="amt" data-h="Up to">$20</td>
 <td data-h="Where it works">Any qualifying purchase</td>
 <td data-h="Flags"><span class="chip">use it monthly</span> <span class="chip muted">unverified</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/chase-united-club/">Chase United Club</a><small>$695 annual fee</small></td>
+<td data-h="Credit">Instacart Credit<br><small style="color:var(--muted)">Enroll first</small></td>
+<td class="amt" data-h="Up to">$20</td>
+<td data-h="Where it works">Instacart</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/chase-united-club/">Chase United Club</a><small>$695 annual fee</small></td>
@@ -1018,18 +1030,18 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/chase-united-quest/">Chase United Quest</a><small>$350 annual fee</small></td>
-<td data-h="Credit">Instacart Credit<br><small style="color:var(--muted)">Enroll first</small></td>
-<td class="amt" data-h="Up to">$15</td>
-<td data-h="Where it works">Instacart</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
-</tr>
-<tr>
 <td class="name"><a href="/cards/citi-aadvantage-executive/">Citi / AAdvantage Executive</a><small>$695 annual fee</small></td>
 <td data-h="Credit">Lyft Credit<br><small style="color:var(--muted)">Enroll first</small></td>
 <td class="amt" data-h="Up to">$15</td>
 <td data-h="Where it works">Lyft</td>
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/chase-united-quest/">Chase United Quest</a><small>$350 annual fee</small></td>
+<td data-h="Credit">Instacart Credit<br><small style="color:var(--muted)">Enroll first</small></td>
+<td class="amt" data-h="Up to">$15</td>
+<td data-h="Where it works">Instacart</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/amex-business-gold/">American Express Business Gold</a><small>$375 annual fee</small></td>
@@ -1067,6 +1079,20 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
 </tr>
 <tr>
+<td class="name"><a href="/cards/amex-gold/">American Express Gold Card</a><small>$325 annual fee</small></td>
+<td data-h="Credit">Uber Cash<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
+<td class="amt" data-h="Up to">$10</td>
+<td data-h="Where it works">Uber, Uber Eats</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/amex-gold/">American Express Gold Card</a><small>$325 annual fee</small></td>
+<td data-h="Credit">Dining Credit<br><small style="color:var(--muted)">Enroll first</small></td>
+<td class="amt" data-h="Up to">$10</td>
+<td data-h="Where it works">Grubhub, The Cheesecake Factory, Buffalo Wild Wings, Wonder and 1 more</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
+</tr>
+<tr>
 <td class="name"><a href="/cards/amex-blue-cash-preferred/">American Express Blue Cash Preferred</a><small>$95 annual fee</small></td>
 <td data-h="Credit">Disney Streaming Credit<br><small style="color:var(--muted)">Enroll first</small></td>
 <td class="amt" data-h="Up to">$10</td>
@@ -1079,6 +1105,27 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td class="amt" data-h="Up to">$10</td>
 <td data-h="Where it works">Verizon, AT&amp;T, T-Mobile, US Cellular and 5 more</td>
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/chase-sapphire-preferred/">Chase Sapphire Preferred</a><small>$95 annual fee</small></td>
+<td data-h="Credit">DoorDash Monthly Promo (DashPass)<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
+<td class="amt" data-h="Up to">$10</td>
+<td data-h="Where it works">DoorDash</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/chase-sapphire-reserve/">Chase Sapphire Reserve</a><small>$795 annual fee</small></td>
+<td data-h="Credit">Lyft In-App Credit<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
+<td class="amt" data-h="Up to">$10</td>
+<td data-h="Where it works">Lyft</td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-09-30</span></td>
+</tr>
+<tr>
+<td class="name"><a href="/cards/chase-sapphire-reserve/">Chase Sapphire Reserve</a><small>$795 annual fee</small></td>
+<td data-h="Credit">Peloton Membership Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
+<td class="amt" data-h="Up to">$10</td>
+<td data-h="Where it works">Peloton</td>
+<td data-h="Flags"><span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/amex-delta-gold/">American Express Delta SkyMiles Gold</a><small>$150 annual fee</small></td>
@@ -1137,20 +1184,6 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/amex-gold/">American Express Gold Card</a><small>$325 annual fee</small></td>
-<td data-h="Credit">Uber Cash<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
-<td class="amt" data-h="Up to">$10</td>
-<td data-h="Where it works">Uber, Uber Eats</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/amex-gold/">American Express Gold Card</a><small>$325 annual fee</small></td>
-<td data-h="Credit">Dining Credit<br><small style="color:var(--muted)">Enroll first</small></td>
-<td class="amt" data-h="Up to">$10</td>
-<td data-h="Where it works">Grubhub, The Cheesecake Factory, Buffalo Wild Wings, Wonder and 1 more</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
-</tr>
-<tr>
 <td class="name"><a href="/cards/chase-ink-business-preferred/">Chase Ink Business Preferred</a><small>$95 annual fee</small></td>
 <td data-h="Credit">DoorDash Non-Restaurant Credit<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
 <td class="amt" data-h="Up to">$10</td>
@@ -1172,25 +1205,11 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td data-h="Flags"><span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span> <span class="chip muted">unverified</span></td>
 </tr>
 <tr>
-<td class="name"><a href="/cards/chase-sapphire-preferred/">Chase Sapphire Preferred</a><small>$95 annual fee</small></td>
-<td data-h="Credit">DoorDash Monthly Promo (DashPass)<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
+<td class="name"><a href="/cards/robinhood-platinum-card/">Robinhood Platinum Card</a><small>$695 annual fee</small></td>
+<td data-h="Credit">DoorDash Monthly Promo<br><small style="color:var(--muted)">Enroll first</small></td>
 <td class="amt" data-h="Up to">$10</td>
 <td data-h="Where it works">DoorDash</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/chase-sapphire-reserve/">Chase Sapphire Reserve</a><small>$795 annual fee</small></td>
-<td data-h="Credit">Lyft In-App Credit<br><small style="color:var(--muted)">Enroll first; paid as in-app credit, not on your statement</small></td>
-<td class="amt" data-h="Up to">$10</td>
-<td data-h="Where it works">Lyft</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-09-30</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/chase-sapphire-reserve/">Chase Sapphire Reserve</a><small>$795 annual fee</small></td>
-<td data-h="Credit">Peloton Membership Credit<br><small style="color:var(--muted)">Automatic once you spend</small></td>
-<td class="amt" data-h="Up to">$10</td>
-<td data-h="Where it works">Peloton</td>
-<td data-h="Flags"><span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
+<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/chase-sapphire-reserve-business/">Chase Sapphire Reserve for Business</a><small>$795 annual fee</small></td>
@@ -1205,13 +1224,6 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td class="amt" data-h="Up to">$10</td>
 <td data-h="Where it works">Instacart</td>
 <td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span> <span class="chip">ends 2027-12-31</span></td>
-</tr>
-<tr>
-<td class="name"><a href="/cards/robinhood-platinum-card/">Robinhood Platinum Card</a><small>$695 annual fee</small></td>
-<td data-h="Credit">DoorDash Monthly Promo<br><small style="color:var(--muted)">Enroll first</small></td>
-<td class="amt" data-h="Up to">$10</td>
-<td data-h="Where it works">DoorDash</td>
-<td data-h="Flags"><span class="chip amber">enroll first</span> <span class="chip">use it monthly</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/amex-gold/">American Express Gold Card</a><small>$325 annual fee</small></td>
@@ -1250,7 +1262,7 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
   </div>
 </section>
 
-<script type="application/json" id="dec31-data">{"year":2026,"url":"https://worthmyfee.com/credits/expiring-december-31/","cards":[{"id":"amex-centurion","n":"American Express Centurion Card","i":"American Express","f":5000,"a":0},{"id":"amex-platinum","n":"American Express Platinum Card","i":"American Express","f":895,"a":0},{"id":"amex-business-platinum","n":"American Express Business Platinum","i":"American Express","f":895,"a":0},{"id":"amex-platinum-schwab","n":"American Express Platinum Card for Schwab","i":"American Express","f":895,"a":0},{"id":"amex-platinum-morgan-stanley","n":"American Express Platinum Card for Morgan Stanley","i":"American Express","f":895,"a":0},{"id":"amex-bonvoy-brilliant","n":"American Express Marriott Bonvoy Brilliant","i":"American Express","f":650,"a":0},{"id":"amex-delta-reserve-business","n":"American Express Delta SkyMiles Reserve Business","i":"American Express","f":650,"a":1},{"id":"amex-delta-reserve","n":"American Express Delta SkyMiles Reserve","i":"American Express","f":650,"a":1},{"id":"amex-hilton-aspire","n":"Hilton Honors American Express Aspire Card","i":"American Express","f":550,"a":0},{"id":"amex-business-gold","n":"American Express Business Gold","i":"American Express","f":375,"a":0},{"id":"amex-delta-platinum","n":"American Express Delta SkyMiles Platinum","i":"American Express","f":350,"a":1},{"id":"amex-delta-platinum-business","n":"American Express Delta SkyMiles Platinum Business","i":"American Express","f":350,"a":1},{"id":"amex-gold","n":"American Express Gold Card","i":"American Express","f":325,"a":0},{"id":"amex-bonvoy-bevy","n":"American Express Marriott Bonvoy Bevy","i":"American Express","f":250,"a":0},{"id":"amex-hilton-business","n":"Hilton Honors American Express Business Card","i":"American Express","f":195,"a":0},{"id":"amex-green","n":"American Express Green Card","i":"American Express","f":150,"a":0},{"id":"amex-delta-gold","n":"American Express Delta SkyMiles Gold","i":"American Express","f":150,"a":0},{"id":"amex-delta-gold-business","n":"American Express Delta SkyMiles Gold Business","i":"American Express","f":150,"a":0},{"id":"amex-hilton-surpass","n":"Hilton Honors American Express Surpass Card","i":"American Express","f":150,"a":0},{"id":"amex-bonvoy-business","n":"American Express Marriott Bonvoy Business","i":"American Express","f":125,"a":0},{"id":"amex-business-green","n":"American Express Business Green Rewards","i":"American Express","f":95,"a":0},{"id":"amex-blue-cash-preferred","n":"American Express Blue Cash Preferred","i":"American Express","f":95,"a":0},{"id":"boa-premium-rewards-elite","n":"Bank of America Premium Rewards Elite","i":"Bank of America","f":550,"a":0},{"id":"boa-atmos-summit","n":"Bank of America Atmos Rewards Summit Visa Infinite","i":"Bank of America","f":395,"a":0},{"id":"boa-premium-rewards","n":"Bank of America Premium Rewards","i":"Bank of America","f":95,"a":0},{"id":"boa-atmos-ascent","n":"Bank of America Atmos Rewards Ascent Visa Signature","i":"Bank of America","f":95,"a":2},{"id":"barclays-wyndham-earner-business","n":"Barclays Wyndham Rewards Earner Business Card","i":"Barclays","f":149,"a":1},{"id":"barclays-jetblue-plus","n":"Barclays JetBlue Plus Card","i":"Barclays","f":99,"a":1},{"id":"barclays-jetblue-business","n":"Barclays JetBlue Business Card","i":"Barclays","f":99,"a":1},{"id":"barclays-wyndham-earner-plus","n":"Barclays Wyndham Rewards Earner Plus Card","i":"Barclays","f":95,"a":0},{"id":"bilt-palladium","n":"Bilt Palladium Card","i":"Bilt","f":495,"a":0},{"id":"bilt-obsidian","n":"Bilt Obsidian Card","i":"Bilt","f":95,"a":0},{"id":"capital-one-venture-x","n":"Capital One Venture X","i":"Capital One","f":395,"a":1},{"id":"capital-one-venture-x-business","n":"Capital One Venture X Business","i":"Capital One","f":395,"a":1},{"id":"capital-one-spark-cash-plus","n":"Capital One Spark Cash Plus","i":"Capital One","f":150,"a":0},{"id":"capital-one-venture","n":"Capital One Venture","i":"Capital One","f":95,"a":0},{"id":"capital-one-spark-cash","n":"Capital One Spark Cash","i":"Capital One","f":95,"a":0},{"id":"capital-one-venture-business","n":"Capital One Venture Business","i":"Capital One","f":95,"a":2},{"id":"chase-sapphire-reserve","n":"Chase Sapphire Reserve","i":"Chase","f":795,"a":1},{"id":"jp-morgan-reserve","n":"Chase J.P. Morgan Reserve","i":"Chase","f":795,"a":1},{"id":"chase-sapphire-reserve-business","n":"Chase Sapphire Reserve for Business","i":"Chase","f":795,"a":1},{"id":"chase-united-club","n":"Chase United Club","i":"Chase","f":695,"a":4},{"id":"chase-ritz-carlton","n":"Chase Ritz-Carlton Credit Card","i":"Chase","f":450,"a":1},{"id":"chase-united-quest","n":"Chase United Quest","i":"Chase","f":350,"a":4},{"id":"southwest-rapid-rewards-performance-business","n":"Chase Southwest Rapid Rewards Performance Business","i":"Chase","f":299,"a":0},{"id":"chase-bonvoy-bountiful","n":"Chase Marriott Bonvoy Bountiful","i":"Chase","f":250,"a":0},{"id":"southwest-rapid-rewards-priority","n":"Chase Southwest Rapid Rewards Priority","i":"Chase","f":229,"a":0},{"id":"chase-world-of-hyatt-business","n":"Chase World of Hyatt Business Credit Card","i":"Chase","f":199,"a":1},{"id":"chase-united-explorer","n":"Chase United Explorer","i":"Chase","f":150,"a":4},{"id":"southwest-rapid-rewards-premier","n":"Chase Southwest Rapid Rewards Premier","i":"Chase","f":149,"a":0},{"id":"southwest-rapid-rewards-premier-business","n":"Chase Southwest Rapid Rewards Premier Business","i":"Chase","f":149,"a":0},{"id":"chase-ihg-premier-business","n":"Chase IHG One Rewards Premier Business","i":"Chase","f":99,"a":0},{"id":"chase-ihg-premier","n":"Chase IHG One Rewards Premier","i":"Chase","f":99,"a":0},{"id":"southwest-rapid-rewards-plus","n":"Chase Southwest Rapid Rewards Plus","i":"Chase","f":99,"a":0},{"id":"chase-bonvoy-boundless","n":"Chase Marriott Bonvoy Boundless","i":"Chase","f":95,"a":0},{"id":"chase-sapphire-preferred","n":"Chase Sapphire Preferred","i":"Chase","f":95,"a":1},{"id":"chase-ink-business-preferred","n":"Chase Ink Business Preferred","i":"Chase","f":95,"a":0},{"id":"chase-world-of-hyatt","n":"Chase World of Hyatt Credit Card","i":"Chase","f":95,"a":0},{"id":"citi-aadvantage-executive","n":"Citi / AAdvantage Executive","i":"Citi","f":695,"a":0},{"id":"citi-strata-elite","n":"Citi Strata Elite","i":"Citi","f":595,"a":0},{"id":"citi-prestige","n":"Citi Prestige","i":"Citi","f":495,"a":0},{"id":"citi-aadvantage-platinum-select","n":"Citi / AAdvantage Platinum Select","i":"Citi","f":99,"a":0},{"id":"citi-strata-premier","n":"Citi Strata Premier","i":"Citi","f":95,"a":0},{"id":"robinhood-platinum-card","n":"Robinhood Platinum Card","i":"Robinhood","f":695,"a":4},{"id":"robinhood-gold-card","n":"Robinhood Gold Card","i":"Robinhood","f":50,"a":0},{"id":"usbank-altitude-reserve","n":"U.S. Bank Altitude Reserve","i":"U.S. Bank","f":400,"a":1},{"id":"wells-fargo-autograph-journey","n":"Wells Fargo Autograph Journey","i":"Wells Fargo","f":95,"a":1}],"credits":[{"k":"jp-morgan-reserve","n":"The Edit Hotel Credit","s":500,"w":"the whole year","h":"The Edit by Chase Travel only (prepaid hotels); single charge of $400 or more; 2-night minimum","e":false},{"k":"chase-sapphire-reserve","n":"The Edit Hotel Credit","s":500,"w":"the whole year","h":"The Edit by Chase Travel only (prepaid hotels); single charge of $400 or more; 2-night minimum","e":false},{"k":"chase-sapphire-reserve-business","n":"The Edit Hotel Credit","s":500,"w":"the whole year","h":"The Edit by Chase Travel only (prepaid hotels); single charge of $400 or more; 2-night minimum","e":false},{"k":"amex-business-gold","n":"ChatGPT Business Credit","s":300,"w":"the whole year","h":"OpenAI, ChatGPT","e":true},{"k":"amex-business-platinum","n":"Hotel Credit (FHR / The Hotel Collection)","s":300,"w":"July–December","h":"Amex Travel (Fine Hotels + Resorts / The Hotel Collection) only (prepaid hotels); single charge of $400 or more","e":true},{"k":"amex-business-platinum","n":"ChatGPT Business Credit","s":300,"w":"the whole year","h":"OpenAI, ChatGPT","e":true},{"k":"amex-platinum","n":"Hotel Credit (FHR / The Hotel Collection)","s":300,"w":"July–December","h":"Amex Travel (Fine Hotels + Resorts / The Hotel Collection) only (prepaid hotels); single charge of $400 or more","e":true},{"k":"amex-platinum","n":"Equinox Credit","s":300,"w":"the whole year","h":"Equinox","e":true},{"k":"amex-platinum-morgan-stanley","n":"Hotel Credit (FHR / The Hotel Collection)","s":300,"w":"July–December","h":"Amex Travel (Fine Hotels + Resorts / The Hotel Collection) only (prepaid hotels); single charge of $400 or more","e":true},{"k":"amex-platinum-morgan-stanley","n":"Equinox Credit","s":300,"w":"the whole year","h":"Equinox","e":true},{"k":"amex-platinum-schwab","n":"Hotel Credit (FHR / The Hotel Collection)","s":300,"w":"July–December","h":"Amex Travel (Fine Hotels + Resorts / The Hotel Collection) only (prepaid hotels); single charge of $400 or more","e":true},{"k":"amex-platinum-schwab","n":"Equinox Credit","s":300,"w":"the whole year","h":"Equinox","e":true},{"k":"boa-premium-rewards-elite","n":"$300 Airline Incidental Credit","s":300,"w":"the whole year","h":"Any qualifying purchase","e":false},{"k":"chase-ritz-carlton","n":"$300 Annual Travel Credit (airline incidentals)","s":300,"w":"the whole year","h":"Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more","e":true},{"k":"citi-prestige","n":"4th Night Free (twice a year)","s":300,"w":"the whole year","h":"Citi Travel only (prepaid hotels); single charge of $400 or more; 4-night minimum","e":false},{"k":"citi-strata-elite","n":"Citi Travel Hotel Credit","s":300,"w":"the whole year","h":"Citi Travel only (prepaid hotels); 2-night minimum","e":false},{"k":"amex-business-platinum","n":"Adobe Credit","s":250,"w":"the whole year","h":"Adobe; single charge of $600 or more","e":true},{"k":"amex-centurion","n":"Resy Dining Credit","s":250,"w":"October–December","h":"Resy","e":true},{"k":"amex-delta-reserve-business","n":"Delta Stays Hotel Credit","s":250,"w":"the whole year","h":"Delta Stays only (prepaid hotels)","e":false},{"k":"jp-morgan-reserve","n":"$250 Select Hotels Credit (2026)","s":250,"w":"the whole year","h":"Chase Travel only (prepaid hotels); single charge of $250 or more; 2-night minimum","e":false},{"k":"chase-sapphire-reserve","n":"$250 Select Hotels Credit (2026)","s":250,"w":"the whole year","h":"Chase Travel only (prepaid hotels); single charge of $250 or more; 2-night minimum","e":false},{"k":"chase-sapphire-reserve-business","n":"$250 Select Hotels Credit (2026)","s":250,"w":"the whole year","h":"Chase Travel only (prepaid hotels); single charge of $250 or more; 2-night minimum","e":false},{"k":"citi-aadvantage-executive","n":"American Airlines Vacations Credit","s":250,"w":"July–December","h":"American Airlines Vacations","e":false},{"k":"citi-prestige","n":"$250 Annual Travel Credit","s":250,"w":"the whole year","h":"Any qualifying purchase","e":false},{"k":"robinhood-platinum-card","n":"Premium Hotel Credit","s":250,"w":"July–December","h":"Robinhood Travel Portal only (prepaid hotels); 2-night minimum","e":false},{"k":"amex-business-platinum","n":"CLEAR Plus Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-centurion","n":"CLEAR Plus Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-green","n":"CLEAR Plus Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-platinum","n":"CLEAR Plus Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-platinum-morgan-stanley","n":"CLEAR Plus Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-platinum-schwab","n":"CLEAR Plus Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-hilton-aspire","n":"CLEAR Plus Membership Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-business-platinum","n":"Airline Fee Credit","s":200,"w":"the whole year","h":"Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more","e":true},{"k":"amex-delta-platinum-business","n":"Delta Stays Hotel Credit","s":200,"w":"the whole year","h":"Delta Stays only (prepaid hotels)","e":false},{"k":"amex-delta-reserve","n":"Delta Stays Hotel Credit","s":200,"w":"the whole year","h":"Delta Stays only (prepaid hotels)","e":false},{"k":"amex-platinum","n":"Airline Fee Credit","s":200,"w":"the whole year","h":"Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more","e":true},{"k":"amex-platinum","n":"Oura Ring Credit","s":200,"w":"the whole year","h":"OuraRing.com","e":true},{"k":"amex-platinum-morgan-stanley","n":"Airline Fee Credit","s":200,"w":"the whole year","h":"Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more","e":true},{"k":"amex-platinum-morgan-stanley","n":"Oura Ring Credit","s":200,"w":"the whole year","h":"OuraRing.com","e":true},{"k":"amex-platinum-schwab","n":"Airline Fee Credit","s":200,"w":"the whole year","h":"Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more","e":true},{"k":"amex-platinum-schwab","n":"Oura Ring Credit","s":200,"w":"the whole year","h":"OuraRing.com","e":true},{"k":"bilt-palladium","n":"Bilt Travel Hotel Credit","s":200,"w":"July–December","h":"Bilt Travel only (prepaid hotels); single charge of $200 or more; 2-night minimum","e":false},{"k":"chase-sapphire-reserve-business","n":"ZipRecruiter Credit","s":200,"w":"July–December","h":"ZipRecruiter","e":false},{"k":"chase-sapphire-reserve-business","n":"Google Workspace Credit","s":200,"w":"the whole year","h":"Google Workspace","e":false},{"k":"citi-aadvantage-executive","n":"Omni Free Night Reward","s":200,"w":"the whole year","h":"Omni Hotels & Resorts","e":false},{"k":"citi-strata-elite","n":"Splurge Credit","s":200,"w":"the whole year","h":"1stDibs, American Airlines, Best Buy, Future Personal Training and 1 more","e":true},{"k":"amex-hilton-aspire","n":"Semiannual Hilton Resort Credit","s":200,"w":"July–December","h":"Hilton, Waldorf Astoria, Conrad","e":false},{"k":"amex-business-gold","n":"Squarespace Credit","s":150,"w":"the whole year","h":"Squarespace, Acuity Scheduling","e":true},{"k":"amex-business-platinum","n":"Dell Credit","s":150,"w":"the whole year","h":"Dell Technologies","e":true},{"k":"amex-delta-gold-business","n":"Delta Stays Hotel Credit","s":150,"w":"the whole year","h":"Delta Stays only (prepaid hotels)","e":false},{"k":"amex-delta-platinum","n":"Delta Stays Hotel Credit","s":150,"w":"the whole year","h":"Delta Stays only (prepaid hotels)","e":false},{"k":"boa-premium-rewards-elite","n":"$150 Lifestyle Conveniences Credit","s":150,"w":"the whole year","h":"Any qualifying purchase","e":false},{"k":"jp-morgan-reserve","n":"Exclusive Tables Dining Credit","s":150,"w":"July–December","h":"OpenTable","e":false},{"k":"jp-morgan-reserve","n":"StubHub / viagogo Credit","s":150,"w":"July–December","h":"StubHub, viagogo","e":true},{"k":"chase-sapphire-reserve","n":"Exclusive Tables Dining Credit","s":150,"w":"July–December","h":"OpenTable","e":false},{"k":"chase-sapphire-reserve","n":"StubHub / viagogo Credit","s":150,"w":"July–December","h":"StubHub, viagogo","e":true},{"k":"robinhood-platinum-card","n":"Flight Credit","s":150,"w":"July–December","h":"Any qualifying purchase","e":false},{"k":"amex-platinum","n":"Uber One Membership Credit","s":120,"w":"the whole year","h":"Uber One","e":true},{"k":"amex-platinum-morgan-stanley","n":"Uber One Membership Credit","s":120,"w":"the whole year","h":"Uber One","e":true},{"k":"amex-platinum-schwab","n":"Uber One Membership Credit","s":120,"w":"the whole year","h":"Uber One","e":true},{"k":"citi-aadvantage-executive","n":"Avis / Budget Rental Credit","s":120,"w":"the whole year","h":"Avis Rent A Car, Avis Car Rental, Budget Rent A Car","e":false},{"k":"robinhood-platinum-card","n":"DashPass Membership","s":120,"w":"the whole year","h":"DoorDash","e":true},{"k":"amex-delta-gold","n":"Delta Stays Hotel Credit","s":100,"w":"the whole year","h":"Delta Stays only (prepaid hotels)","e":false},{"k":"amex-platinum","n":"Resy Dining Credit","s":100,"w":"October–December","h":"Resy","e":true},{"k":"amex-platinum-morgan-stanley","n":"Resy Dining Credit","s":100,"w":"October–December","h":"Resy","e":true},{"k":"amex-platinum-schwab","n":"Resy Dining Credit","s":100,"w":"October–December","h":"Resy","e":true},{"k":"amex-platinum-schwab","n":"Schwab Appreciation Bonus","s":100,"w":"the whole year","h":"Schwab Appreciation Bonus, Charles Schwab","e":false},{"k":"boa-premium-rewards","n":"$100 Airline Incidental Credit","s":100,"w":"the whole year","h":"Any qualifying purchase","e":false},{"k":"citi-aadvantage-executive","n":"Inflight & Admirals Club Purchase Credit","s":100,"w":"the whole year","h":"American Airlines, Admirals Club","e":false},{"k":"citi-strata-elite","n":"Blacklane Chauffeur Credit","s":100,"w":"July–December","h":"Blacklane","e":false},{"k":"citi-strata-premier","n":"Citi Travel Hotel Benefit","s":100,"w":"the whole year","h":"Citi Travel only (prepaid hotels); single charge of $500 or more","e":false},{"k":"amex-business-platinum","n":"Indeed Credit","s":90,"w":"October–December","h":"Indeed","e":true},{"k":"amex-platinum","n":"lululemon Credit","s":75,"w":"October–December","h":"lululemon","e":true},{"k":"amex-platinum-morgan-stanley","n":"lululemon Credit","s":75,"w":"October–December","h":"lululemon","e":true},{"k":"amex-platinum-schwab","n":"lululemon Credit","s":75,"w":"October–December","h":"lululemon","e":true},{"k":"amex-hilton-business","n":"Quarterly Hilton Credit","s":60,"w":"October–December","h":"Hilton, Hampton Inn, DoubleTree, Embassy Suites and 9 more","e":false},{"k":"amex-business-platinum","n":"Hilton Credit","s":50,"w":"October–December","h":"Hilton, Conrad, Waldorf Astoria, DoubleTree and 2 more","e":true},{"k":"amex-gold","n":"Resy Dining Credit","s":50,"w":"July–December","h":"Resy","e":true},{"k":"bilt-obsidian","n":"Bilt Travel Hotel Credit","s":50,"w":"July–December","h":"Bilt Travel only (prepaid hotels); single charge of $50 or more; 2-night minimum","e":false},{"k":"chase-sapphire-reserve-business","n":"giftcards.com Credit","s":50,"w":"July–December","h":"GIFTCARDS.COM","e":false},{"k":"amex-hilton-aspire","n":"Quarterly Flight Credit","s":50,"w":"October–December","h":"Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more","e":false},{"k":"amex-hilton-surpass","n":"Quarterly Hilton Credit","s":50,"w":"October–December","h":"Hilton, Hampton Inn, DoubleTree, Embassy Suites and 9 more","e":false},{"k":"amex-platinum","n":"Uber Cash","s":35,"w":"December","h":"Uber, Uber Eats","e":true},{"k":"amex-platinum-morgan-stanley","n":"Uber Cash","s":35,"w":"December","h":"Uber, Uber Eats","e":true},{"k":"amex-platinum-schwab","n":"Uber Cash","s":35,"w":"December","h":"Uber, Uber Eats","e":true},{"k":"robinhood-platinum-card","n":"Waymo Credit","s":30,"w":"December","h":"Waymo","e":false},{"k":"amex-bonvoy-brilliant","n":"Brilliant Dining Credit","s":25,"w":"December","h":"Any qualifying purchase","e":true},{"k":"amex-platinum","n":"Digital Entertainment Credit","s":25,"w":"December","h":"Disney Plus, ESPN, Hulu, The New York Times and 5 more","e":true},{"k":"amex-platinum-morgan-stanley","n":"Digital Entertainment Credit","s":25,"w":"December","h":"Disney Plus, ESPN, Hulu, The New York Times and 5 more","e":true},{"k":"amex-platinum-schwab","n":"Digital Entertainment Credit","s":25,"w":"December","h":"Disney Plus, ESPN, Hulu, The New York Times and 5 more","e":true},{"k":"chase-ihg-premier","n":"United TravelBank Credit","s":25,"w":"July–December","h":"United Airlines, United TravelBank, United com","e":true},{"k":"chase-ihg-premier-business","n":"United TravelBank Credit","s":25,"w":"July–December","h":"United Airlines, United TravelBank, United com","e":true},{"k":"jp-morgan-reserve","n":"DoorDash Monthly Promos","s":25,"w":"December","h":"DoorDash","e":true},{"k":"chase-sapphire-reserve","n":"DoorDash Monthly Promos","s":25,"w":"December","h":"DoorDash","e":true},{"k":"chase-sapphire-reserve-business","n":"DoorDash Monthly Promos","s":25,"w":"December","h":"DoorDash","e":true},{"k":"jp-morgan-reserve","n":"Apple TV+ & Apple Music Subscriptions","s":24,"w":"December","h":"Apple TV+, Apple Music","e":true},{"k":"chase-sapphire-reserve","n":"Apple TV+ & Apple Music Subscriptions","s":24,"w":"December","h":"Apple TV+, Apple Music","e":true},{"k":"amex-business-gold","n":"Flexible Business Credit (FedEx / Grubhub / Office Supply)","s":20,"w":"December","h":"FedEx, Grubhub, Office Depot, OfficeMax and 1 more","e":true},{"k":"amex-delta-reserve","n":"Resy Dining Credit","s":20,"w":"December","h":"Resy","e":true},{"k":"amex-delta-reserve-business","n":"Resy Dining Credit","s":20,"w":"December","h":"Resy","e":true},{"k":"chase-united-club","n":"Instacart Credit","s":20,"w":"December","h":"Instacart","e":true},{"k":"robinhood-platinum-card","n":"Dining Credit","s":20,"w":"December","h":"Any qualifying purchase","e":false},{"k":"chase-united-club","n":"Rideshare Credit","s":18,"w":"December","h":"Uber, Lyft, Curb Mobility","e":true},{"k":"chase-united-quest","n":"Instacart Credit","s":15,"w":"December","h":"Instacart","e":true},{"k":"citi-aadvantage-executive","n":"Lyft Credit","s":15,"w":"December","h":"Lyft","e":true},{"k":"amex-business-gold","n":"Walmart+ Membership Credit","s":13,"w":"December","h":"Walmart+","e":true},{"k":"amex-platinum","n":"Walmart+ Membership Credit","s":13,"w":"December","h":"Walmart+","e":true},{"k":"amex-platinum-morgan-stanley","n":"Walmart+ Membership Credit","s":13,"w":"December","h":"Walmart+","e":true},{"k":"amex-platinum-schwab","n":"Walmart+ Membership Credit","s":13,"w":"December","h":"Walmart+","e":true},{"k":"chase-united-quest","n":"Rideshare Credit","s":12,"w":"December","h":"Uber, Lyft, Curb Mobility","e":true},{"k":"amex-blue-cash-preferred","n":"Disney Streaming Credit","s":10,"w":"December","h":"Disney Plus, Hulu, ESPN Plus","e":true},{"k":"amex-business-platinum","n":"Wireless Credit","s":10,"w":"December","h":"Verizon, AT&T, T-Mobile, US Cellular and 5 more","e":true},{"k":"amex-delta-gold","n":"Rideshare Credit","s":10,"w":"December","h":"Uber, Lyft, Curb Mobility, Alto Experience","e":true},{"k":"amex-delta-gold-business","n":"Rideshare Credit","s":10,"w":"December","h":"Uber, Lyft, Curb Mobility, Alto Experience","e":true},{"k":"amex-delta-platinum","n":"Resy Dining Credit","s":10,"w":"December","h":"Resy","e":true},{"k":"amex-delta-platinum","n":"Rideshare Credit","s":10,"w":"December","h":"Uber, Lyft, Curb Mobility, Revel and 1 more","e":true},{"k":"amex-delta-platinum-business","n":"Resy Dining Credit","s":10,"w":"December","h":"Resy","e":true},{"k":"amex-delta-platinum-business","n":"Rideshare Credit","s":10,"w":"December","h":"Uber, Lyft, Curb Mobility, Alto Experience","e":true},{"k":"amex-delta-reserve","n":"Rideshare Credit","s":10,"w":"December","h":"Uber, Lyft, Curb Mobility, Alto Experience","e":true},{"k":"amex-delta-reserve-business","n":"Rideshare Credit","s":10,"w":"December","h":"Uber, Lyft, Curb Mobility, Alto Experience","e":true},{"k":"amex-gold","n":"Uber Cash","s":10,"w":"December","h":"Uber, Uber Eats","e":true},{"k":"amex-gold","n":"Dining Credit","s":10,"w":"December","h":"Grubhub, The Cheesecake Factory, Buffalo Wild Wings, Wonder and 1 more","e":true},{"k":"chase-ink-business-preferred","n":"DoorDash Non-Restaurant Credit","s":10,"w":"December","h":"DoorDash","e":true},{"k":"jp-morgan-reserve","n":"Lyft In-App Credit","s":10,"w":"December","h":"Lyft","e":true},{"k":"jp-morgan-reserve","n":"Peloton Membership Credit","s":10,"w":"December","h":"Peloton","e":false},{"k":"chase-sapphire-preferred","n":"DoorDash Monthly Promo (DashPass)","s":10,"w":"December","h":"DoorDash","e":true},{"k":"chase-sapphire-reserve","n":"Lyft In-App Credit","s":10,"w":"December","h":"Lyft","e":true},{"k":"chase-sapphire-reserve","n":"Peloton Membership Credit","s":10,"w":"December","h":"Peloton","e":false},{"k":"chase-sapphire-reserve-business","n":"Lyft In-App Credit","s":10,"w":"December","h":"Lyft","e":true},{"k":"chase-united-explorer","n":"Instacart Credit","s":10,"w":"December","h":"Instacart","e":true},{"k":"robinhood-platinum-card","n":"DoorDash Monthly Promo","s":10,"w":"December","h":"DoorDash","e":true},{"k":"amex-gold","n":"Dunkin' Credit","s":7,"w":"December","h":"Dunkin'","e":true},{"k":"chase-united-explorer","n":"Rideshare Credit","s":5,"w":"December","h":"Uber, Lyft, Curb Mobility","e":true}]}</script>
+<script type="application/json" id="dec31-data">{"year":2026,"url":"https://worthmyfee.com/credits/expiring-december-31/","app":"https://app.worthmyfee.com","cards":[{"id":"amex-centurion","n":"American Express Centurion Card","i":"American Express","f":5000,"a":0},{"id":"amex-platinum","n":"American Express Platinum Card","i":"American Express","f":895,"a":0},{"id":"amex-business-platinum","n":"American Express Business Platinum","i":"American Express","f":895,"a":0},{"id":"amex-platinum-schwab","n":"American Express Platinum Card for Schwab","i":"American Express","f":895,"a":0},{"id":"amex-platinum-morgan-stanley","n":"American Express Platinum Card for Morgan Stanley","i":"American Express","f":895,"a":0},{"id":"amex-bonvoy-brilliant","n":"American Express Marriott Bonvoy Brilliant","i":"American Express","f":650,"a":0},{"id":"amex-delta-reserve-business","n":"American Express Delta SkyMiles Reserve Business","i":"American Express","f":650,"a":1},{"id":"amex-delta-reserve","n":"American Express Delta SkyMiles Reserve","i":"American Express","f":650,"a":1},{"id":"amex-hilton-aspire","n":"Hilton Honors American Express Aspire Card","i":"American Express","f":550,"a":0},{"id":"amex-business-gold","n":"American Express Business Gold","i":"American Express","f":375,"a":0},{"id":"amex-delta-platinum","n":"American Express Delta SkyMiles Platinum","i":"American Express","f":350,"a":1},{"id":"amex-delta-platinum-business","n":"American Express Delta SkyMiles Platinum Business","i":"American Express","f":350,"a":1},{"id":"amex-gold","n":"American Express Gold Card","i":"American Express","f":325,"a":0},{"id":"amex-bonvoy-bevy","n":"American Express Marriott Bonvoy Bevy","i":"American Express","f":250,"a":0},{"id":"amex-hilton-business","n":"Hilton Honors American Express Business Card","i":"American Express","f":195,"a":0},{"id":"amex-green","n":"American Express Green Card","i":"American Express","f":150,"a":0},{"id":"amex-delta-gold","n":"American Express Delta SkyMiles Gold","i":"American Express","f":150,"a":0},{"id":"amex-delta-gold-business","n":"American Express Delta SkyMiles Gold Business","i":"American Express","f":150,"a":0},{"id":"amex-hilton-surpass","n":"Hilton Honors American Express Surpass Card","i":"American Express","f":150,"a":0},{"id":"amex-bonvoy-business","n":"American Express Marriott Bonvoy Business","i":"American Express","f":125,"a":0},{"id":"amex-business-green","n":"American Express Business Green Rewards","i":"American Express","f":95,"a":0},{"id":"amex-blue-cash-preferred","n":"American Express Blue Cash Preferred","i":"American Express","f":95,"a":0},{"id":"boa-premium-rewards-elite","n":"Bank of America Premium Rewards Elite","i":"Bank of America","f":550,"a":0},{"id":"boa-atmos-summit","n":"Bank of America Atmos Rewards Summit Visa Infinite","i":"Bank of America","f":395,"a":0},{"id":"boa-premium-rewards","n":"Bank of America Premium Rewards","i":"Bank of America","f":95,"a":0},{"id":"boa-atmos-ascent","n":"Bank of America Atmos Rewards Ascent Visa Signature","i":"Bank of America","f":95,"a":2},{"id":"barclays-wyndham-earner-business","n":"Barclays Wyndham Rewards Earner Business Card","i":"Barclays","f":149,"a":1},{"id":"barclays-jetblue-plus","n":"Barclays JetBlue Plus Card","i":"Barclays","f":99,"a":1},{"id":"barclays-jetblue-business","n":"Barclays JetBlue Business Card","i":"Barclays","f":99,"a":1},{"id":"barclays-wyndham-earner-plus","n":"Barclays Wyndham Rewards Earner Plus Card","i":"Barclays","f":95,"a":0},{"id":"bilt-palladium","n":"Bilt Palladium Card","i":"Bilt","f":495,"a":0},{"id":"bilt-obsidian","n":"Bilt Obsidian Card","i":"Bilt","f":95,"a":0},{"id":"capital-one-venture-x","n":"Capital One Venture X","i":"Capital One","f":395,"a":1},{"id":"capital-one-venture-x-business","n":"Capital One Venture X Business","i":"Capital One","f":395,"a":1},{"id":"capital-one-spark-cash-plus","n":"Capital One Spark Cash Plus","i":"Capital One","f":150,"a":0},{"id":"capital-one-venture","n":"Capital One Venture","i":"Capital One","f":95,"a":0},{"id":"capital-one-spark-cash","n":"Capital One Spark Cash","i":"Capital One","f":95,"a":0},{"id":"capital-one-venture-business","n":"Capital One Venture Business","i":"Capital One","f":95,"a":2},{"id":"chase-sapphire-reserve","n":"Chase Sapphire Reserve","i":"Chase","f":795,"a":1},{"id":"jp-morgan-reserve","n":"Chase J.P. Morgan Reserve","i":"Chase","f":795,"a":1},{"id":"chase-sapphire-reserve-business","n":"Chase Sapphire Reserve for Business","i":"Chase","f":795,"a":1},{"id":"chase-united-club","n":"Chase United Club","i":"Chase","f":695,"a":4},{"id":"chase-ritz-carlton","n":"Chase Ritz-Carlton Credit Card","i":"Chase","f":450,"a":1},{"id":"chase-united-quest","n":"Chase United Quest","i":"Chase","f":350,"a":4},{"id":"southwest-rapid-rewards-performance-business","n":"Chase Southwest Rapid Rewards Performance Business","i":"Chase","f":299,"a":0},{"id":"chase-bonvoy-bountiful","n":"Chase Marriott Bonvoy Bountiful","i":"Chase","f":250,"a":0},{"id":"southwest-rapid-rewards-priority","n":"Chase Southwest Rapid Rewards Priority","i":"Chase","f":229,"a":0},{"id":"chase-world-of-hyatt-business","n":"Chase World of Hyatt Business Credit Card","i":"Chase","f":199,"a":1},{"id":"chase-united-explorer","n":"Chase United Explorer","i":"Chase","f":150,"a":4},{"id":"southwest-rapid-rewards-premier","n":"Chase Southwest Rapid Rewards Premier","i":"Chase","f":149,"a":0},{"id":"southwest-rapid-rewards-premier-business","n":"Chase Southwest Rapid Rewards Premier Business","i":"Chase","f":149,"a":0},{"id":"chase-ihg-premier-business","n":"Chase IHG One Rewards Premier Business","i":"Chase","f":99,"a":0},{"id":"chase-ihg-premier","n":"Chase IHG One Rewards Premier","i":"Chase","f":99,"a":0},{"id":"southwest-rapid-rewards-plus","n":"Chase Southwest Rapid Rewards Plus","i":"Chase","f":99,"a":0},{"id":"chase-bonvoy-boundless","n":"Chase Marriott Bonvoy Boundless","i":"Chase","f":95,"a":0},{"id":"chase-sapphire-preferred","n":"Chase Sapphire Preferred","i":"Chase","f":95,"a":1},{"id":"chase-ink-business-preferred","n":"Chase Ink Business Preferred","i":"Chase","f":95,"a":0},{"id":"chase-world-of-hyatt","n":"Chase World of Hyatt Credit Card","i":"Chase","f":95,"a":0},{"id":"citi-aadvantage-executive","n":"Citi / AAdvantage Executive","i":"Citi","f":695,"a":0},{"id":"citi-strata-elite","n":"Citi Strata Elite","i":"Citi","f":595,"a":0},{"id":"citi-prestige","n":"Citi Prestige","i":"Citi","f":495,"a":0},{"id":"citi-aadvantage-platinum-select","n":"Citi / AAdvantage Platinum Select","i":"Citi","f":99,"a":0},{"id":"citi-strata-premier","n":"Citi Strata Premier","i":"Citi","f":95,"a":0},{"id":"robinhood-platinum-card","n":"Robinhood Platinum Card","i":"Robinhood","f":695,"a":4},{"id":"robinhood-gold-card","n":"Robinhood Gold Card","i":"Robinhood","f":50,"a":0},{"id":"usbank-altitude-reserve","n":"U.S. Bank Altitude Reserve","i":"U.S. Bank","f":400,"a":1},{"id":"wells-fargo-autograph-journey","n":"Wells Fargo Autograph Journey","i":"Wells Fargo","f":95,"a":1}],"credits":[{"k":"chase-sapphire-reserve","n":"The Edit Hotel Credit","s":500,"w":"the whole year","h":"The Edit by Chase Travel only (prepaid hotels); single charge of $400 or more; 2-night minimum","e":false},{"k":"jp-morgan-reserve","n":"The Edit Hotel Credit","s":500,"w":"the whole year","h":"The Edit by Chase Travel only (prepaid hotels); single charge of $400 or more; 2-night minimum","e":false},{"k":"chase-sapphire-reserve-business","n":"The Edit Hotel Credit","s":500,"w":"the whole year","h":"The Edit by Chase Travel only (prepaid hotels); single charge of $400 or more; 2-night minimum","e":false},{"k":"boa-premium-rewards-elite","n":"$300 Airline Incidental Credit","s":300,"w":"the whole year","h":"Any qualifying purchase","e":false},{"k":"amex-business-gold","n":"ChatGPT Business Credit","s":300,"w":"the whole year","h":"OpenAI, ChatGPT","e":true},{"k":"amex-business-platinum","n":"Hotel Credit (FHR / The Hotel Collection)","s":300,"w":"July–December","h":"Amex Travel (Fine Hotels + Resorts / The Hotel Collection) only (prepaid hotels); single charge of $400 or more","e":true},{"k":"amex-business-platinum","n":"ChatGPT Business Credit","s":300,"w":"the whole year","h":"OpenAI, ChatGPT","e":true},{"k":"citi-prestige","n":"4th Night Free (twice a year)","s":300,"w":"the whole year","h":"Citi Travel only (prepaid hotels); single charge of $400 or more; 4-night minimum","e":false},{"k":"citi-strata-elite","n":"Citi Travel Hotel Credit","s":300,"w":"the whole year","h":"Citi Travel only (prepaid hotels); 2-night minimum","e":false},{"k":"amex-platinum","n":"Hotel Credit (FHR / The Hotel Collection)","s":300,"w":"July–December","h":"Amex Travel (Fine Hotels + Resorts / The Hotel Collection) only (prepaid hotels); single charge of $400 or more","e":true},{"k":"amex-platinum","n":"Equinox Credit","s":300,"w":"the whole year","h":"Equinox","e":true},{"k":"amex-platinum-morgan-stanley","n":"Hotel Credit (FHR / The Hotel Collection)","s":300,"w":"July–December","h":"Amex Travel (Fine Hotels + Resorts / The Hotel Collection) only (prepaid hotels); single charge of $400 or more","e":true},{"k":"amex-platinum-morgan-stanley","n":"Equinox Credit","s":300,"w":"the whole year","h":"Equinox","e":true},{"k":"amex-platinum-schwab","n":"Hotel Credit (FHR / The Hotel Collection)","s":300,"w":"July–December","h":"Amex Travel (Fine Hotels + Resorts / The Hotel Collection) only (prepaid hotels); single charge of $400 or more","e":true},{"k":"amex-platinum-schwab","n":"Equinox Credit","s":300,"w":"the whole year","h":"Equinox","e":true},{"k":"chase-ritz-carlton","n":"$300 Annual Travel Credit (airline incidentals)","s":300,"w":"the whole year","h":"Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more","e":true},{"k":"amex-business-platinum","n":"Adobe Credit","s":250,"w":"the whole year","h":"Adobe; single charge of $600 or more","e":true},{"k":"chase-sapphire-reserve","n":"$250 Select Hotels Credit (2026)","s":250,"w":"the whole year","h":"Chase Travel only (prepaid hotels); single charge of $250 or more; 2-night minimum","e":false},{"k":"citi-aadvantage-executive","n":"American Airlines Vacations Credit","s":250,"w":"July–December","h":"American Airlines Vacations","e":false},{"k":"citi-prestige","n":"$250 Annual Travel Credit","s":250,"w":"the whole year","h":"Any qualifying purchase","e":false},{"k":"amex-delta-reserve-business","n":"Delta Stays Hotel Credit","s":250,"w":"the whole year","h":"Delta Stays only (prepaid hotels)","e":false},{"k":"jp-morgan-reserve","n":"$250 Select Hotels Credit (2026)","s":250,"w":"the whole year","h":"Chase Travel only (prepaid hotels); single charge of $250 or more; 2-night minimum","e":false},{"k":"robinhood-platinum-card","n":"Premium Hotel Credit","s":250,"w":"July–December","h":"Robinhood Travel Portal only (prepaid hotels); 2-night minimum","e":false},{"k":"chase-sapphire-reserve-business","n":"$250 Select Hotels Credit (2026)","s":250,"w":"the whole year","h":"Chase Travel only (prepaid hotels); single charge of $250 or more; 2-night minimum","e":false},{"k":"amex-centurion","n":"Resy Dining Credit","s":250,"w":"October–December","h":"Resy","e":true},{"k":"amex-green","n":"CLEAR Plus Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-business-platinum","n":"CLEAR Plus Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-hilton-aspire","n":"CLEAR Plus Membership Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-centurion","n":"CLEAR Plus Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-platinum","n":"CLEAR Plus Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-platinum-morgan-stanley","n":"CLEAR Plus Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"amex-platinum-schwab","n":"CLEAR Plus Credit","s":219,"w":"the whole year","h":"CLEAR","e":false},{"k":"bilt-palladium","n":"Bilt Travel Hotel Credit","s":200,"w":"July–December","h":"Bilt Travel only (prepaid hotels); single charge of $200 or more; 2-night minimum","e":false},{"k":"amex-business-platinum","n":"Airline Fee Credit","s":200,"w":"the whole year","h":"Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more","e":true},{"k":"citi-aadvantage-executive","n":"Omni Free Night Reward","s":200,"w":"the whole year","h":"Omni Hotels & Resorts","e":false},{"k":"citi-strata-elite","n":"Splurge Credit","s":200,"w":"the whole year","h":"1stDibs, American Airlines, Best Buy, Future Personal Training and 1 more","e":true},{"k":"amex-delta-platinum-business","n":"Delta Stays Hotel Credit","s":200,"w":"the whole year","h":"Delta Stays only (prepaid hotels)","e":false},{"k":"amex-delta-reserve","n":"Delta Stays Hotel Credit","s":200,"w":"the whole year","h":"Delta Stays only (prepaid hotels)","e":false},{"k":"amex-hilton-aspire","n":"Semiannual Hilton Resort Credit","s":200,"w":"July–December","h":"Hilton, Waldorf Astoria, Conrad","e":false},{"k":"chase-sapphire-reserve-business","n":"ZipRecruiter Credit","s":200,"w":"July–December","h":"ZipRecruiter","e":false},{"k":"chase-sapphire-reserve-business","n":"Google Workspace Credit","s":200,"w":"the whole year","h":"Google Workspace","e":false},{"k":"amex-platinum","n":"Airline Fee Credit","s":200,"w":"the whole year","h":"Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more","e":true},{"k":"amex-platinum","n":"Oura Ring Credit","s":200,"w":"the whole year","h":"OuraRing.com","e":true},{"k":"amex-platinum-morgan-stanley","n":"Airline Fee Credit","s":200,"w":"the whole year","h":"Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more","e":true},{"k":"amex-platinum-morgan-stanley","n":"Oura Ring Credit","s":200,"w":"the whole year","h":"OuraRing.com","e":true},{"k":"amex-platinum-schwab","n":"Airline Fee Credit","s":200,"w":"the whole year","h":"Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more","e":true},{"k":"amex-platinum-schwab","n":"Oura Ring Credit","s":200,"w":"the whole year","h":"OuraRing.com","e":true},{"k":"boa-premium-rewards-elite","n":"$150 Lifestyle Conveniences Credit","s":150,"w":"the whole year","h":"Any qualifying purchase","e":false},{"k":"amex-business-gold","n":"Squarespace Credit","s":150,"w":"the whole year","h":"Squarespace, Acuity Scheduling","e":true},{"k":"amex-business-platinum","n":"Dell Credit","s":150,"w":"the whole year","h":"Dell Technologies","e":true},{"k":"chase-sapphire-reserve","n":"Exclusive Tables Dining Credit","s":150,"w":"July–December","h":"OpenTable","e":false},{"k":"chase-sapphire-reserve","n":"StubHub / viagogo Credit","s":150,"w":"July–December","h":"StubHub, viagogo","e":true},{"k":"amex-delta-gold-business","n":"Delta Stays Hotel Credit","s":150,"w":"the whole year","h":"Delta Stays only (prepaid hotels)","e":false},{"k":"amex-delta-platinum","n":"Delta Stays Hotel Credit","s":150,"w":"the whole year","h":"Delta Stays only (prepaid hotels)","e":false},{"k":"jp-morgan-reserve","n":"Exclusive Tables Dining Credit","s":150,"w":"July–December","h":"OpenTable","e":false},{"k":"jp-morgan-reserve","n":"StubHub / viagogo Credit","s":150,"w":"July–December","h":"StubHub, viagogo","e":true},{"k":"robinhood-platinum-card","n":"Flight Credit","s":150,"w":"July–December","h":"Any qualifying purchase","e":false},{"k":"citi-aadvantage-executive","n":"Avis / Budget Rental Credit","s":120,"w":"the whole year","h":"Avis Rent A Car, Avis Car Rental, Budget Rent A Car","e":false},{"k":"robinhood-platinum-card","n":"DashPass Membership","s":120,"w":"the whole year","h":"DoorDash","e":true},{"k":"amex-platinum","n":"Uber One Membership Credit","s":120,"w":"the whole year","h":"Uber One","e":true},{"k":"amex-platinum-morgan-stanley","n":"Uber One Membership Credit","s":120,"w":"the whole year","h":"Uber One","e":true},{"k":"amex-platinum-schwab","n":"Uber One Membership Credit","s":120,"w":"the whole year","h":"Uber One","e":true},{"k":"boa-premium-rewards","n":"$100 Airline Incidental Credit","s":100,"w":"the whole year","h":"Any qualifying purchase","e":false},{"k":"citi-aadvantage-executive","n":"Inflight & Admirals Club Purchase Credit","s":100,"w":"the whole year","h":"American Airlines, Admirals Club","e":false},{"k":"citi-strata-elite","n":"Blacklane Chauffeur Credit","s":100,"w":"July–December","h":"Blacklane","e":false},{"k":"citi-strata-premier","n":"Citi Travel Hotel Benefit","s":100,"w":"the whole year","h":"Citi Travel only (prepaid hotels); single charge of $500 or more","e":false},{"k":"amex-delta-gold","n":"Delta Stays Hotel Credit","s":100,"w":"the whole year","h":"Delta Stays only (prepaid hotels)","e":false},{"k":"amex-platinum","n":"Resy Dining Credit","s":100,"w":"October–December","h":"Resy","e":true},{"k":"amex-platinum-morgan-stanley","n":"Resy Dining Credit","s":100,"w":"October–December","h":"Resy","e":true},{"k":"amex-platinum-schwab","n":"Resy Dining Credit","s":100,"w":"October–December","h":"Resy","e":true},{"k":"amex-platinum-schwab","n":"Schwab Appreciation Bonus","s":100,"w":"the whole year","h":"Schwab Appreciation Bonus, Charles Schwab","e":false},{"k":"amex-business-platinum","n":"Indeed Credit","s":90,"w":"October–December","h":"Indeed","e":true},{"k":"amex-platinum","n":"lululemon Credit","s":75,"w":"October–December","h":"lululemon","e":true},{"k":"amex-platinum-morgan-stanley","n":"lululemon Credit","s":75,"w":"October–December","h":"lululemon","e":true},{"k":"amex-platinum-schwab","n":"lululemon Credit","s":75,"w":"October–December","h":"lululemon","e":true},{"k":"amex-hilton-business","n":"Quarterly Hilton Credit","s":60,"w":"October–December","h":"Hilton, Hampton Inn, DoubleTree, Embassy Suites and 9 more","e":false},{"k":"amex-gold","n":"Resy Dining Credit","s":50,"w":"July–December","h":"Resy","e":true},{"k":"bilt-obsidian","n":"Bilt Travel Hotel Credit","s":50,"w":"July–December","h":"Bilt Travel only (prepaid hotels); single charge of $50 or more; 2-night minimum","e":false},{"k":"amex-business-platinum","n":"Hilton Credit","s":50,"w":"October–December","h":"Hilton, Conrad, Waldorf Astoria, DoubleTree and 2 more","e":true},{"k":"amex-hilton-aspire","n":"Quarterly Flight Credit","s":50,"w":"October–December","h":"Delta Air Lines, United Airlines, American Airlines, Southwest Airlines and 5 more","e":false},{"k":"amex-hilton-surpass","n":"Quarterly Hilton Credit","s":50,"w":"October–December","h":"Hilton, Hampton Inn, DoubleTree, Embassy Suites and 9 more","e":false},{"k":"chase-sapphire-reserve-business","n":"giftcards.com Credit","s":50,"w":"July–December","h":"GIFTCARDS.COM","e":false},{"k":"amex-platinum","n":"Uber Cash","s":35,"w":"December","h":"Uber, Uber Eats","e":true},{"k":"amex-platinum-morgan-stanley","n":"Uber Cash","s":35,"w":"December","h":"Uber, Uber Eats","e":true},{"k":"amex-platinum-schwab","n":"Uber Cash","s":35,"w":"December","h":"Uber, Uber Eats","e":true},{"k":"robinhood-platinum-card","n":"Waymo Credit","s":30,"w":"December","h":"Waymo","e":false},{"k":"chase-sapphire-reserve","n":"DoorDash Monthly Promos","s":25,"w":"December","h":"DoorDash","e":true},{"k":"chase-ihg-premier","n":"United TravelBank Credit","s":25,"w":"July–December","h":"United Airlines, United TravelBank, United com","e":true},{"k":"chase-ihg-premier-business","n":"United TravelBank Credit","s":25,"w":"July–December","h":"United Airlines, United TravelBank, United com","e":true},{"k":"jp-morgan-reserve","n":"DoorDash Monthly Promos","s":25,"w":"December","h":"DoorDash","e":true},{"k":"amex-bonvoy-brilliant","n":"Brilliant Dining Credit","s":25,"w":"December","h":"Any qualifying purchase","e":true},{"k":"chase-sapphire-reserve-business","n":"DoorDash Monthly Promos","s":25,"w":"December","h":"DoorDash","e":true},{"k":"amex-platinum","n":"Digital Entertainment Credit","s":25,"w":"December","h":"Disney Plus, ESPN, Hulu, The New York Times and 5 more","e":true},{"k":"amex-platinum-morgan-stanley","n":"Digital Entertainment Credit","s":25,"w":"December","h":"Disney Plus, ESPN, Hulu, The New York Times and 5 more","e":true},{"k":"amex-platinum-schwab","n":"Digital Entertainment Credit","s":25,"w":"December","h":"Disney Plus, ESPN, Hulu, The New York Times and 5 more","e":true},{"k":"chase-sapphire-reserve","n":"Apple TV+ & Apple Music Subscriptions","s":24,"w":"December","h":"Apple TV+, Apple Music","e":true},{"k":"jp-morgan-reserve","n":"Apple TV+ & Apple Music Subscriptions","s":24,"w":"December","h":"Apple TV+, Apple Music","e":true},{"k":"amex-business-gold","n":"Flexible Business Credit (FedEx / Grubhub / Office Supply)","s":20,"w":"December","h":"FedEx, Grubhub, Office Depot, OfficeMax and 1 more","e":true},{"k":"amex-delta-reserve","n":"Resy Dining Credit","s":20,"w":"December","h":"Resy","e":true},{"k":"amex-delta-reserve-business","n":"Resy Dining Credit","s":20,"w":"December","h":"Resy","e":true},{"k":"robinhood-platinum-card","n":"Dining Credit","s":20,"w":"December","h":"Any qualifying purchase","e":false},{"k":"chase-united-club","n":"Instacart Credit","s":20,"w":"December","h":"Instacart","e":true},{"k":"chase-united-club","n":"Rideshare Credit","s":18,"w":"December","h":"Uber, Lyft, Curb Mobility","e":true},{"k":"citi-aadvantage-executive","n":"Lyft Credit","s":15,"w":"December","h":"Lyft","e":true},{"k":"chase-united-quest","n":"Instacart Credit","s":15,"w":"December","h":"Instacart","e":true},{"k":"amex-business-gold","n":"Walmart+ Membership Credit","s":13,"w":"December","h":"Walmart+","e":true},{"k":"amex-platinum","n":"Walmart+ Membership Credit","s":13,"w":"December","h":"Walmart+","e":true},{"k":"amex-platinum-morgan-stanley","n":"Walmart+ Membership Credit","s":13,"w":"December","h":"Walmart+","e":true},{"k":"amex-platinum-schwab","n":"Walmart+ Membership Credit","s":13,"w":"December","h":"Walmart+","e":true},{"k":"chase-united-quest","n":"Rideshare Credit","s":12,"w":"December","h":"Uber, Lyft, Curb Mobility","e":true},{"k":"amex-gold","n":"Uber Cash","s":10,"w":"December","h":"Uber, Uber Eats","e":true},{"k":"amex-gold","n":"Dining Credit","s":10,"w":"December","h":"Grubhub, The Cheesecake Factory, Buffalo Wild Wings, Wonder and 1 more","e":true},{"k":"amex-blue-cash-preferred","n":"Disney Streaming Credit","s":10,"w":"December","h":"Disney Plus, Hulu, ESPN Plus","e":true},{"k":"amex-business-platinum","n":"Wireless Credit","s":10,"w":"December","h":"Verizon, AT&T, T-Mobile, US Cellular and 5 more","e":true},{"k":"chase-sapphire-preferred","n":"DoorDash Monthly Promo (DashPass)","s":10,"w":"December","h":"DoorDash","e":true},{"k":"chase-sapphire-reserve","n":"Lyft In-App Credit","s":10,"w":"December","h":"Lyft","e":true},{"k":"chase-sapphire-reserve","n":"Peloton Membership Credit","s":10,"w":"December","h":"Peloton","e":false},{"k":"amex-delta-gold","n":"Rideshare Credit","s":10,"w":"December","h":"Uber, Lyft, Curb Mobility, Alto Experience","e":true},{"k":"amex-delta-gold-business","n":"Rideshare Credit","s":10,"w":"December","h":"Uber, Lyft, Curb Mobility, Alto Experience","e":true},{"k":"amex-delta-platinum","n":"Resy Dining Credit","s":10,"w":"December","h":"Resy","e":true},{"k":"amex-delta-platinum","n":"Rideshare Credit","s":10,"w":"December","h":"Uber, Lyft, Curb Mobility, Revel and 1 more","e":true},{"k":"amex-delta-platinum-business","n":"Resy Dining Credit","s":10,"w":"December","h":"Resy","e":true},{"k":"amex-delta-platinum-business","n":"Rideshare Credit","s":10,"w":"December","h":"Uber, Lyft, Curb Mobility, Alto Experience","e":true},{"k":"amex-delta-reserve","n":"Rideshare Credit","s":10,"w":"December","h":"Uber, Lyft, Curb Mobility, Alto Experience","e":true},{"k":"amex-delta-reserve-business","n":"Rideshare Credit","s":10,"w":"December","h":"Uber, Lyft, Curb Mobility, Alto Experience","e":true},{"k":"chase-ink-business-preferred","n":"DoorDash Non-Restaurant Credit","s":10,"w":"December","h":"DoorDash","e":true},{"k":"jp-morgan-reserve","n":"Lyft In-App Credit","s":10,"w":"December","h":"Lyft","e":true},{"k":"jp-morgan-reserve","n":"Peloton Membership Credit","s":10,"w":"December","h":"Peloton","e":false},{"k":"robinhood-platinum-card","n":"DoorDash Monthly Promo","s":10,"w":"December","h":"DoorDash","e":true},{"k":"chase-sapphire-reserve-business","n":"Lyft In-App Credit","s":10,"w":"December","h":"Lyft","e":true},{"k":"chase-united-explorer","n":"Instacart Credit","s":10,"w":"December","h":"Instacart","e":true},{"k":"amex-gold","n":"Dunkin' Credit","s":7,"w":"December","h":"Dunkin'","e":true},{"k":"chase-united-explorer","n":"Rideshare Credit","s":5,"w":"December","h":"Uber, Lyft, Curb Mobility","e":true}]}</script>
 <script>(function () {
   var data = JSON.parse(document.getElementById('dec31-data').textContent);
   var root = document.getElementById('picker');
@@ -1357,6 +1369,27 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
   }
+  var form = document.getElementById('dec31-email');
+  var input = document.getElementById('dec31-email-input');
+  var news = document.getElementById('dec31-news');
+  var note = document.getElementById('dec31-email-msg');
+  var button = form.querySelector('button');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var cards = picked().map(function (c) { return c.id; });
+    if (!cards.length) return;
+    button.disabled = true;
+    fetch(data.app + '/api/reminders', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ kind: 'dec31', email: input.value, cards: cards, news: news.checked }) })
+      .then(function (r) {
+        if (r.status === 202) { note.textContent = 'Check your inbox: confirm the link we just sent to ' + input.value.trim() + '. Nothing is sent on December 1 until you do.'; track('dec31_email', { cards: cards.length }); }
+        else if (r.status === 400) note.textContent = 'That email address doesn’t look right. Check it and try again.';
+        else if (r.status === 429) note.textContent = 'Too many tries from this connection. Try again in an hour, or use the calendar reminder above.';
+        else note.textContent = 'We couldn’t sign you up just now. Try again later, or use the calendar reminder above.';
+      }, function () { note.textContent = 'We couldn’t reach the server. Try again, or use the calendar reminder above.'; })
+      .then(function () { button.disabled = false; });
+  });
+  var baseRender = render;
+  render = function () { baseRender(); form.hidden = !picked().length; };
   root.hidden = false;
   render();
 })();</script>
