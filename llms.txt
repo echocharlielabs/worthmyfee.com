@@ -1,0 +1,93 @@
+# Worth My Fee
+
+> Worth My Fee audits whether each premium credit card's annual fee pays for itself, from the cardholder's own transactions: which credits were actually used, which ones the spending can reach, and whether to keep, downgrade or cancel each card. The public catalog covers 91 cards and 229 credits, each cited to issuer pages.
+
+## Data
+- [Card credits that expire December 31, 2026](https://worthmyfee.com/credits/expiring-december-31/): every calendar-year credit on 39 annual-fee cards with the amount that resets December 31, and a picker for your own cards.
+- [All cards](https://worthmyfee.com/cards/): annual fee, credits and break-even for every card in the catalog.
+- [Portal hotel credits](https://worthmyfee.com/credits/portal-hotel/): every card that has one.
+- [Global Entry, TSA PreCheck and CLEAR credits](https://worthmyfee.com/credits/trusted-traveler/): every card that has one.
+- [Airline incidental fee credits](https://worthmyfee.com/credits/airline-fee/): every card that has one.
+- [Companion certificates and fares](https://worthmyfee.com/credits/companion/): every card that has one.
+- [Hotel credits and free-night awards](https://worthmyfee.com/credits/hotel/): every card that has one.
+- [Anniversary bonuses](https://worthmyfee.com/credits/anniversary/): every card that has one.
+- [Business software and services credits](https://worthmyfee.com/credits/business/): every card that has one.
+- [Streaming and entertainment credits](https://worthmyfee.com/credits/streaming/): every card that has one.
+- [Rideshare and chauffeur credits](https://worthmyfee.com/credits/rideshare/): every card that has one.
+- [Dining and delivery credits](https://worthmyfee.com/credits/dining/): every card that has one.
+- [Airline and flight credits](https://worthmyfee.com/credits/airline/): every card that has one.
+- [General travel credits](https://worthmyfee.com/credits/travel/): every card that has one.
+- [Lifestyle, wellness and shopping credits](https://worthmyfee.com/credits/lifestyle/): every card that has one.
+
+## Cards
+- [American Express Centurion Card](https://worthmyfee.com/cards/amex-centurion/): $5,000 a year, 3 credits.
+- [American Express Platinum Card](https://worthmyfee.com/cards/amex-platinum/): $895 a year, 12 credits.
+- [American Express Business Platinum](https://worthmyfee.com/cards/amex-business-platinum/): $895 a year, 10 credits.
+- [American Express Platinum Card for Schwab](https://worthmyfee.com/cards/amex-platinum-schwab/): $895 a year, 13 credits.
+- [American Express Platinum Card for Morgan Stanley](https://worthmyfee.com/cards/amex-platinum-morgan-stanley/): $895 a year, 12 credits.
+- [Chase Sapphire Reserve](https://worthmyfee.com/cards/chase-sapphire-reserve/): $795 a year, 10 credits.
+- [Chase J.P. Morgan Reserve](https://worthmyfee.com/cards/jp-morgan-reserve/): $795 a year, 10 credits.
+- [Chase Sapphire Reserve for Business](https://worthmyfee.com/cards/chase-sapphire-reserve-business/): $795 a year, 9 credits.
+- [Citi / AAdvantage Executive](https://worthmyfee.com/cards/citi-aadvantage-executive/): $695 a year, 6 credits.
+- [Chase United Club](https://worthmyfee.com/cards/chase-united-club/): $695 a year, 7 credits.
+- [Robinhood Platinum Card](https://worthmyfee.com/cards/robinhood-platinum-card/): $695 a year, 11 credits.
+- [American Express Marriott Bonvoy Brilliant](https://worthmyfee.com/cards/amex-bonvoy-brilliant/): $650 a year, 3 credits.
+- [American Express Delta SkyMiles Reserve Business](https://worthmyfee.com/cards/amex-delta-reserve-business/): $650 a year, 5 credits.
+- [American Express Delta SkyMiles Reserve](https://worthmyfee.com/cards/amex-delta-reserve/): $650 a year, 5 credits.
+- [Citi Strata Elite](https://worthmyfee.com/cards/citi-strata-elite/): $595 a year, 4 credits.
+- [Hilton Honors American Express Aspire Card](https://worthmyfee.com/cards/amex-hilton-aspire/): $550 a year, 4 credits.
+- [Bank of America Premium Rewards Elite](https://worthmyfee.com/cards/boa-premium-rewards-elite/): $550 a year, 3 credits.
+- [Citi Prestige](https://worthmyfee.com/cards/citi-prestige/): $495 a year, 3 credits.
+- [Bilt Palladium Card](https://worthmyfee.com/cards/bilt-palladium/): $495 a year, 2 credits.
+- [Chase Ritz-Carlton Credit Card](https://worthmyfee.com/cards/chase-ritz-carlton/): $450 a year, 4 credits.
+- [U.S. Bank Altitude Reserve](https://worthmyfee.com/cards/usbank-altitude-reserve/): $400 a year, 2 credits.
+- [Capital One Venture X](https://worthmyfee.com/cards/capital-one-venture-x/): $395 a year, 3 credits.
+- [Capital One Venture X Business](https://worthmyfee.com/cards/capital-one-venture-x-business/): $395 a year, 3 credits.
+- [Bank of America Atmos Rewards Summit Visa Infinite](https://worthmyfee.com/cards/boa-atmos-summit/): $395 a year, 1 credit.
+- [American Express Business Gold](https://worthmyfee.com/cards/amex-business-gold/): $375 a year, 4 credits.
+- [American Express Delta SkyMiles Platinum](https://worthmyfee.com/cards/amex-delta-platinum/): $350 a year, 5 credits.
+- [American Express Delta SkyMiles Platinum Business](https://worthmyfee.com/cards/amex-delta-platinum-business/): $350 a year, 5 credits.
+- [Chase United Quest](https://worthmyfee.com/cards/chase-united-quest/): $350 a year, 9 credits.
+- [American Express Gold Card](https://worthmyfee.com/cards/amex-gold/): $325 a year, 5 credits.
+- [Chase Southwest Rapid Rewards Performance Business](https://worthmyfee.com/cards/southwest-rapid-rewards-performance-business/): $299 a year, 2 credits.
+- [American Express Marriott Bonvoy Bevy](https://worthmyfee.com/cards/amex-bonvoy-bevy/): $250 a year, 0 credits.
+- [Chase Marriott Bonvoy Bountiful](https://worthmyfee.com/cards/chase-bonvoy-bountiful/): $250 a year, 0 credits.
+- [Chase Southwest Rapid Rewards Priority](https://worthmyfee.com/cards/southwest-rapid-rewards-priority/): $229 a year, 1 credit.
+- [Chase World of Hyatt Business Credit Card](https://worthmyfee.com/cards/chase-world-of-hyatt-business/): $199 a year, 1 credit.
+- [Hilton Honors American Express Business Card](https://worthmyfee.com/cards/amex-hilton-business/): $195 a year, 1 credit.
+- [American Express Green Card](https://worthmyfee.com/cards/amex-green/): $150 a year, 1 credit.
+- [American Express Delta SkyMiles Gold](https://worthmyfee.com/cards/amex-delta-gold/): $150 a year, 2 credits.
+- [American Express Delta SkyMiles Gold Business](https://worthmyfee.com/cards/amex-delta-gold-business/): $150 a year, 2 credits.
+- [Hilton Honors American Express Surpass Card](https://worthmyfee.com/cards/amex-hilton-surpass/): $150 a year, 1 credit.
+- [Chase United Explorer](https://worthmyfee.com/cards/chase-united-explorer/): $150 a year, 7 credits.
+- [Capital One Spark Cash Plus](https://worthmyfee.com/cards/capital-one-spark-cash-plus/): $150 a year, 0 credits.
+- [Chase Southwest Rapid Rewards Premier](https://worthmyfee.com/cards/southwest-rapid-rewards-premier/): $149 a year, 1 credit.
+- [Chase Southwest Rapid Rewards Premier Business](https://worthmyfee.com/cards/southwest-rapid-rewards-premier-business/): $149 a year, 1 credit.
+- [Barclays Wyndham Rewards Earner Business Card](https://worthmyfee.com/cards/barclays-wyndham-earner-business/): $149 a year, 2 credits.
+- [American Express Marriott Bonvoy Business](https://worthmyfee.com/cards/amex-bonvoy-business/): $125 a year, 1 credit.
+- [Chase IHG One Rewards Premier Business](https://worthmyfee.com/cards/chase-ihg-premier-business/): $99 a year, 3 credits.
+- [Chase IHG One Rewards Premier](https://worthmyfee.com/cards/chase-ihg-premier/): $99 a year, 3 credits.
+- [Citi / AAdvantage Platinum Select](https://worthmyfee.com/cards/citi-aadvantage-platinum-select/): $99 a year, 0 credits.
+- [Chase Southwest Rapid Rewards Plus](https://worthmyfee.com/cards/southwest-rapid-rewards-plus/): $99 a year, 1 credit.
+- [Barclays JetBlue Plus Card](https://worthmyfee.com/cards/barclays-jetblue-plus/): $99 a year, 2 credits.
+- [Barclays JetBlue Business Card](https://worthmyfee.com/cards/barclays-jetblue-business/): $99 a year, 2 credits.
+- [Citi Strata Premier](https://worthmyfee.com/cards/citi-strata-premier/): $95 a year, 1 credit.
+- [American Express Business Green Rewards](https://worthmyfee.com/cards/amex-business-green/): $95 a year, 0 credits.
+- [Chase Marriott Bonvoy Boundless](https://worthmyfee.com/cards/chase-bonvoy-boundless/): $95 a year, 1 credit.
+- [Chase Sapphire Preferred](https://worthmyfee.com/cards/chase-sapphire-preferred/): $95 a year, 4 credits.
+- [Capital One Venture](https://worthmyfee.com/cards/capital-one-venture/): $95 a year, 1 credit.
+- [Bank of America Premium Rewards](https://worthmyfee.com/cards/boa-premium-rewards/): $95 a year, 2 credits.
+- [Wells Fargo Autograph Journey](https://worthmyfee.com/cards/wells-fargo-autograph-journey/): $95 a year, 1 credit.
+- [Chase Ink Business Preferred](https://worthmyfee.com/cards/chase-ink-business-preferred/): $95 a year, 1 credit.
+- [Chase World of Hyatt Credit Card](https://worthmyfee.com/cards/chase-world-of-hyatt/): $95 a year, 1 credit.
+- [Bilt Obsidian Card](https://worthmyfee.com/cards/bilt-obsidian/): $95 a year, 1 credit.
+- [Bank of America Atmos Rewards Ascent Visa Signature](https://worthmyfee.com/cards/boa-atmos-ascent/): $95 a year, 2 credits.
+- [American Express Blue Cash Preferred](https://worthmyfee.com/cards/amex-blue-cash-preferred/): $95 a year, 1 credit.
+- [Capital One Spark Cash](https://worthmyfee.com/cards/capital-one-spark-cash/): $95 a year, 0 credits.
+- [Capital One Venture Business](https://worthmyfee.com/cards/capital-one-venture-business/): $95 a year, 3 credits.
+- [Barclays Wyndham Rewards Earner Plus Card](https://worthmyfee.com/cards/barclays-wyndham-earner-plus/): $95 a year, 1 credit.
+- [Robinhood Gold Card](https://worthmyfee.com/cards/robinhood-gold-card/): $50 a year, 0 credits.
+
+## About
+- [Methodology](https://worthmyfee.com/methodology/): how a card is scored from 12 months of transactions.
+- [About](https://worthmyfee.com/about/): who maintains the catalog; paid by users, never by issuers.
