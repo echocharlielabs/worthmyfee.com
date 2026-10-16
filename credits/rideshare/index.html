@@ -122,6 +122,7 @@ footer{border-top:3px double var(--rule-strong);padding:2.5rem 0 3rem}
 .prose-long p{max-width:42rem;color:var(--ink-soft)}
 .prose-long li{margin-bottom:.5rem}
 .prose-long h2{margin-top:2.2rem}
+.dec31-note{font-size:.95rem;margin:-.6rem 0 1.4rem;max-width:42rem}
 </style>
 <!-- Marketing-site-only product analytics (PostHog). Never present in the signed-in
      application at app.worthmyfee.com — see privacy.html for what this can and cannot see:
@@ -186,7 +187,7 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
    "url": "https://worthmyfee.com/credits/rideshare/",
    "name": "Rideshare and chauffeur credits: every card that has one",
    "description": "23 rideshare and chauffeur credits across 19 annual-fee cards, $3,196 a year at face value.",
-   "dateModified": "2026-10-08",
+   "dateModified": "2026-10-16",
    "isPartOf": {
     "@id": "https://worthmyfee.com/#website"
    },
@@ -206,6 +207,7 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
     <div class="nav-links">
       <a href="/#how">How it works</a>
       <a href="/cards/">Cards</a>
+      <a href="/credits/expiring-december-31/">Dec 31 credits</a>
       <a href="/methodology/">Methodology</a>
       <a href="/#pricing">Pricing</a>
       <a href="/#faq">FAQ</a>
@@ -237,14 +239,14 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td class="name"><a href="/cards/robinhood-platinum-card/">Robinhood Platinum Card</a><small>$695 annual fee</small></td>
 <td data-h="Credit">Waymo Credit<br><small style="color:var(--muted)">&quot;Up to $20 in credits per month, January through November&quot; and $30 in December, on rides booked in the Waymo app and paid with the card; Waymo operates in a handful of cities.</small></td>
 <td class="amt" data-h="Per year">$250</td>
-<td data-h="Paid out as">$20 a month; unused amounts are lost</td>
+<td data-h="Paid out as">$20 a month ($30 in December); unused amounts are lost</td>
 <td data-h="Flags"><span class="chip">use it monthly</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/amex-platinum/">American Express Platinum Card</a><small>$895 annual fee</small></td>
 <td data-h="Credit">Uber Cash<br><small style="color:var(--muted)">$15/month Jan–Nov plus $35 in December; delivered as in-app Uber Cash (US only), expiring at month-end, not a statement credit. Requires adding the card to the Uber account.</small></td>
 <td class="amt" data-h="Per year">$200</td>
-<td data-h="Paid out as">$15 a month; unused amounts are lost</td>
+<td data-h="Paid out as">$15 a month ($35 in December); unused amounts are lost</td>
 <td data-h="Flags"><span class="chip">use it monthly</span></td>
 </tr>
 <tr>
@@ -258,14 +260,14 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td class="name"><a href="/cards/amex-platinum-schwab/">American Express Platinum Card for Schwab</a><small>$895 annual fee</small></td>
 <td data-h="Credit">Uber Cash<br><small style="color:var(--muted)">Schwab Platinum: the same term as the Platinum Card per Amex’s Schwab terms page. $15/month Jan–Nov plus $35 in December; delivered as in-app Uber Cash (US only), expiring at month-end, not a statement credit. Requires adding the card to the Uber account.</small></td>
 <td class="amt" data-h="Per year">$200</td>
-<td data-h="Paid out as">$15 a month; unused amounts are lost</td>
+<td data-h="Paid out as">$15 a month ($35 in December); unused amounts are lost</td>
 <td data-h="Flags"><span class="chip">use it monthly</span> <span class="chip muted">unverified</span></td>
 </tr>
 <tr>
 <td class="name"><a href="/cards/amex-platinum-morgan-stanley/">American Express Platinum Card for Morgan Stanley</a><small>$895 annual fee</small></td>
 <td data-h="Credit">Uber Cash<br><small style="color:var(--muted)">Morgan Stanley Platinum: the same term as the Platinum Card per Amex’s Morgan Stanley terms page. Requires adding the card to the Uber account.</small></td>
 <td class="amt" data-h="Per year">$200</td>
-<td data-h="Paid out as">$15 a month; unused amounts are lost</td>
+<td data-h="Paid out as">$15 a month ($35 in December); unused amounts are lost</td>
 <td data-h="Flags"><span class="chip">use it monthly</span> <span class="chip muted">unverified</span></td>
 </tr>
 <tr>
@@ -279,7 +281,7 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td class="name"><a href="/cards/chase-united-club/">Chase United Club</a><small>$695 annual fee</small></td>
 <td data-h="Credit">Rideshare Credit</td>
 <td class="amt" data-h="Per year">$150</td>
-<td data-h="Paid out as">$12 a month; unused amounts are lost</td>
+<td data-h="Paid out as">$12 a month ($18 in December); unused amounts are lost</td>
 <td data-h="Flags"><span class="chip">use it monthly</span></td>
 </tr>
 <tr>
@@ -377,7 +379,7 @@ posthog.init('phc_wx6Q7gUk2fT5TYMecVidhSYQJSNUhqmzP7y9TdGNcaKh', {
 <td class="name"><a href="/cards/chase-united-quest/">Chase United Quest</a><small>$350 annual fee</small></td>
 <td data-h="Credit">Rideshare Credit</td>
 <td class="amt" data-h="Per year">$100</td>
-<td data-h="Paid out as">$8 a month; unused amounts are lost</td>
+<td data-h="Paid out as">$8 a month ($12 in December); unused amounts are lost</td>
 <td data-h="Flags"><span class="chip">use it monthly</span></td>
 </tr>
 <tr>
