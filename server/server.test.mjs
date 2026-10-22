@@ -50,7 +50,7 @@ describe('server: GitHub Pages behaviour', () => {
     assert.equal(r.body, readFileSync(join(SITE, 'index.html'), 'utf8'));
     assert.equal(r.headers['cache-control'], 'public, max-age=600');
     assert.equal(r.headers['x-content-type-options'], 'nosniff');
-    assert.match(r.headers['strict-transport-security'], /^max-age=\d+/);
+    assert.equal(r.headers['strict-transport-security'], 'max-age=31556952; includeSubDomains; preload');
     assert.equal(r.headers['referrer-policy'], 'strict-origin-when-cross-origin');
     assert.ok(r.headers.etag);
     assert.ok(r.headers['last-modified']);
