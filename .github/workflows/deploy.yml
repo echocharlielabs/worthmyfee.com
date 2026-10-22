@@ -55,6 +55,9 @@ jobs:
       - name: Install server dependencies
         working-directory: server
         run: npm ci
+      - name: Audit gate (server production tree, High+)
+        working-directory: server
+        run: npm audit --omit=dev --audit-level=high
       - name: Unit tests
         run: node --test scripts/*.test.mjs server/*.test.mjs
       - name: Boot the server and curl it

@@ -57,7 +57,7 @@ Same answers as GitHub Pages:
 
 Headers: `Cache-Control: public, max-age=600` (Pages' value), `ETag` and
 `Last-Modified` with 304s, `X-Content-Type-Options: nosniff`,
-`Strict-Transport-Security: max-age=31556952`, `Referrer-Policy:
+`Strict-Transport-Security: max-age=31556952; includeSubDomains; preload` (every subdomain is HTTPS: app, www and the Pages rollback; submitted to hstspreload.org), `Referrer-Policy:
 strict-origin-when-cross-origin`; `.txt` is `text/plain`, `.xml` is
 `application/xml`. HEAD works wherever GET does.
 

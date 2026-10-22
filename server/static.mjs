@@ -42,7 +42,7 @@ export const CACHE_CONTROL = 'public, max-age=600';
 /** Headers on every response, page or error. */
 export const SECURITY_HEADERS = Object.freeze({
   'X-Content-Type-Options': 'nosniff',
-  'Strict-Transport-Security': 'max-age=31556952',
+  'Strict-Transport-Security': 'max-age=31556952; includeSubDomains; preload',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
 });
 

@@ -1,0 +1,37 @@
+# Dependency, base-image and Actions updates (CCBT docs/SECURITY-REVIEW-2026-10-22.md, F5).
+# Security updates arrive as soon as an advisory lands; the rest is batched
+# weekly. The Deploy workflow's test job runs on each PR.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /server
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: America/New_York
+    groups:
+      server:
+        update-types: [minor, patch]
+    labels: [dependencies]
+
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: America/New_York
+    ignore:
+      - dependency-name: node
+        update-types: [version-update:semver-major]
+    labels: [dependencies]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: America/New_York
+    labels: [dependencies]
