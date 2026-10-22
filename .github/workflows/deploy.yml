@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -116,7 +116,7 @@ jobs:
           if [ -z "${{ vars.POSTHOG_API_KEY }}" ]; then
             echo "::warning::POSTHOG_API_KEY is not set — the service will run with crawler logging off."
           fi
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         if: steps.vars.outputs.ready == 'true'
       - uses: google-github-actions/auth@v2
         if: steps.vars.outputs.ready == 'true'
@@ -177,7 +177,7 @@ jobs:
       contents: read
       pages: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - uses: actions/setup-node@v4
