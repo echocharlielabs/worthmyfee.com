@@ -4,13 +4,13 @@
 
 # Stage 1: the site files. server/ is in the context for stage 2, so it is
 # removed here rather than in .dockerignore.
-FROM node:22.12-slim AS site
+FROM node:22.23.4-slim AS site
 COPY . /site
 RUN rm -rf /site/server
 
 # Stage 2: the server, then the site from stage 1. The npm layer comes first
 # so a content-only push reuses it.
-FROM node:22.12-slim
+FROM node:22.23.4-slim
 WORKDIR /app
 ENV NODE_ENV=production SITE_DIR=/site
 COPY server/package.json server/package-lock.json ./
