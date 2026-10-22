@@ -125,7 +125,7 @@ describe('Dockerfile / .dockerignore', () => {
   });
   it('the Dockerfile drops server/ from the site stage and copies only server/ into the app', () => {
     const df = readFileSync(join(SITE, 'Dockerfile'), 'utf8');
-    assert.match(df, /^FROM node:22\.12-slim AS site$/m);
+    assert.match(df, /^FROM node:22\.23\.4-slim AS site$/m);
     assert.match(df, /^COPY \. \/site$/m);
     assert.match(df, /^RUN rm -rf \/site\/server$/m);
     assert.match(df, /^COPY --from=site \/site \/site$/m);
