@@ -4,7 +4,7 @@
   "description": "Serves the worthmyfee.com static site on Cloud Run and logs crawler fetches (docs/cloud-run.md).",
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=26"
   },
   "scripts": {
     "start": "node server.mjs",
@@ -12,6 +12,6 @@
   },
   "dependencies": {
     "compression": "^1.8.2",
-    "express": "^4.21.2"
+    "express": "^5.3.0"
   }
 }

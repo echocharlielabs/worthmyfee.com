@@ -3,7 +3,8 @@
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { createServer, request } from 'node:http';
-import { readFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gunzipSync } from 'node:zlib';
@@ -156,6 +157,29 @@ describe('server: crawler logging off without a PostHog key', () => {
       assert.equal(r.status, 200);
     } finally {
       await new Promise((r) => server.close(r));
+    }
+  });
+});
+
+// Express 5's sendFile (send 1.x) refuses any path with a dot-segment unless
+// dotfiles is `allow`, root included: a checkout under .claude/worktrees.
+describe('server: SITE_DIR under a dot-directory', () => {
+  it('still serves pages and keeps refusing dotfiles inside the site', async () => {
+    const tmp = mkdtempSync(join(tmpdir(), 'wmf-'));
+    const site = join(tmp, '.hidden', 'site');
+    mkdirSync(join(site, '.git'), { recursive: true });
+    writeFileSync(join(site, 'index.html'), '<!doctype html><p>home</p>');
+    writeFileSync(join(site, '.git', 'config'), 'secret');
+    const server = await listen(createApp({ siteDir: site }));
+    try {
+      const port = server.address().port;
+      const home = await raw(port, '/');
+      assert.equal(home.status, 200);
+      assert.equal(home.body, '<!doctype html><p>home</p>');
+      assert.equal((await raw(port, '/.git/config')).status, 404);
+    } finally {
+      await new Promise((r) => server.close(r));
+      rmSync(tmp, { recursive: true, force: true });
     }
   });
 });

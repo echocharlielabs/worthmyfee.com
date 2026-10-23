@@ -1,7 +1,7 @@
 # worthmyfee.com on Cloud Run — runbook
 
 The marketing site is served by the Cloud Run service **`worthmyfee-site`**
-(project `worthmyfee`, region `us-central1`), a small Node 22 + Express 4
+(project `worthmyfee`, region `us-central1`), a small Node 26 + Express 5
 server in `server/` that serves this repo's files verbatim and records every
 crawler fetch. GitHub Pages keeps building every push as the **rollback**:
 pointing DNS back at Pages restores it with current content.
@@ -126,10 +126,11 @@ Automatic: every push to main runs `.github/workflows/deploy.yml`.
 
 Runs share the concurrency group `deploy`, so two pushes never deploy at once.
 
-The image (`Dockerfile`): stage `site` copies the context (trimmed by
-`.dockerignore`) to `/site` and drops `server/`; the final stage installs
-`server/`'s production dependencies, copies the server to `/app` and the site
-from stage `site`, and runs `node server.mjs` as `node`.
+The image (`Dockerfile`, both stages `node:26.12.1-slim`): stage `site`
+copies the context (trimmed by `.dockerignore`) to `/site` and drops
+`server/`; the final stage installs `server/`'s production dependencies,
+copies the server to `/app` and the site from stage `site`, and runs
+`node server.mjs` as `node`.
 `server/static.test.mjs` checks the `.dockerignore` list against `NOT_SERVED`.
 
 Manual deploy (same flags, from a clean checkout of main):
@@ -144,7 +145,7 @@ gcloud run deploy worthmyfee-site --source . --project worthmyfee --region us-ce
 ## Run locally
 
 ```bash
-cd server && npm ci
+cd server && npm ci                                         # Node 26 (engines >=26)
 SITE_DIR=.. PORT=3200 node server.mjs                       # crawler logging off
 SITE_DIR=.. PORT=3200 POSTHOG_API_KEY=phc_… node server.mjs # sends real crawler_hit events
 curl -sI http://localhost:3200/cards/amex-platinum          # 301
